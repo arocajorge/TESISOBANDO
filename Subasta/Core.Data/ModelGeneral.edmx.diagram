@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a6ef96e2de43469e847a525727e5ed3c" Name="Diagram1">
+        <EntityTypeShape EntityType="ModelGeneral.Auditoria" Width="1.5" PointX="8.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.Catalogo" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.CatalogoTipo" Width="1.5" PointX="1.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.Categoria" Width="1.5" PointX="1.5" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.Grupo" Width="1.5" PointX="3.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.Impuesto" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.Linea" Width="1.5" PointX="1.5" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.Oferta" Width="1.5" PointX="10.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.OfertaDet" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.Producto" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.Proveedor" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.ProveedorSucursal" Width="1.5" PointX="8.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.Subasta" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.Usuario" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelGeneral.UsuarioPerfil" Width="1.5" PointX="3.75" PointY="14.625" IsExpanded="true" />
+        <AssociationConnector Association="ModelGeneral.FK_Auditoria_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Catalogo_CatalogoTipo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Producto_Catalogo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Producto_Catalogo1" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Producto_Catalogo2" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Linea_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Grupo_Linea" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Producto_Grupo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_OfertaDet_Impuesto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Producto_Impuesto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Oferta_ProveedorSucursal" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Oferta_Subasta" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_OfertaDet_Oferta" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Subasta_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_ProveedorSucursal_Proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Subasta_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelGeneral.FK_Usuario_UsuarioPerfil" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

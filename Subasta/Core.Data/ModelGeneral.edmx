@@ -1,0 +1,1196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ModelGeneral.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Auditoria">
+          <Key>
+            <PropertyRef Name="IdAuditoria" />
+          </Key>
+          <Property Name="IdAuditoria" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="au_Pantalla" Type="varchar(max)" Nullable="false" />
+          <Property Name="au_Fecha" Type="datetime" Nullable="false" />
+          <Property Name="au_MotivoAnulacion" Type="varchar(max)" />
+          <Property Name="au_Objeto" Type="varchar(max)" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Catalogo">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoTipo" Type="int" Nullable="false" />
+          <Property Name="ct_Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CatalogoTipo">
+          <Key>
+            <PropertyRef Name="IdCatalogoTipo" />
+          </Key>
+          <Property Name="IdCatalogoTipo" Type="int" Nullable="false" />
+          <Property Name="tc_Descripcion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
+          <Property Name="ca_Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="ca_Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="ca_Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="IdGrupo" />
+          </Key>
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="IdLinea" Type="int" Nullable="false" />
+          <Property Name="gr_Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="gr_Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="gr_Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Impuesto">
+          <Key>
+            <PropertyRef Name="IdImpuesto" />
+          </Key>
+          <Property Name="IdImpuesto" Type="int" Nullable="false" />
+          <Property Name="im_Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="im_Porcentaje" Type="float" Nullable="false" />
+          <Property Name="im_Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Linea">
+          <Key>
+            <PropertyRef Name="IdLinea" />
+          </Key>
+          <Property Name="IdLinea" Type="int" Nullable="false" />
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
+          <Property Name="li_Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="li_Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="li_Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Oferta">
+          <Key>
+            <PropertyRef Name="IdOferta" />
+          </Key>
+          <Property Name="IdOferta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSubasta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="of_Observacion" Type="varchar(max)" />
+          <Property Name="of_Estado" Type="bit" Nullable="false" />
+          <Property Name="of_Fecha" Type="datetime" Nullable="false" />
+          <Property Name="of_FechaFin" Type="datetime" Nullable="false" />
+          <Property Name="of_Plazo" Type="int" Nullable="false" />
+          <Property Name="of_EstadoGanador" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OfertaDet">
+          <Key>
+            <PropertyRef Name="IdOferta" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdOferta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="od_Cantidad" Type="float" Nullable="false" />
+          <Property Name="od_PrecioUni" Type="float" Nullable="false" />
+          <Property Name="od_PorDescuento" Type="float" Nullable="false" />
+          <Property Name="od_DescuentoUni" Type="float" Nullable="false" />
+          <Property Name="od_PrecioFinal" Type="float" Nullable="false" />
+          <Property Name="od_Subtotal" Type="float" Nullable="false" />
+          <Property Name="IdImpuesto" Type="int" Nullable="false" />
+          <Property Name="od_Porcentaje" Type="float" Nullable="false" />
+          <Property Name="od_Iva" Type="float" Nullable="false" />
+          <Property Name="od_Total" Type="float" Nullable="false" />
+          <Property Name="od_Observacion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pr_Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="pr_Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="pr_Observacion" Type="varchar(max)" />
+          <Property Name="pr_Estado" Type="bit" Nullable="false" />
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoTipo" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoMarca" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoModelo" Type="int" Nullable="false" />
+          <Property Name="IdImpuestoIva" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pv_Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="pv_TipoDoc" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="pv_CedulaRuc" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pv_Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="pv_Correo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pv_Telefono" Type="varchar" MaxLength="200" />
+          <Property Name="pv_Direccion" Type="varchar" MaxLength="500" />
+          <Property Name="pv_Plazo" Type="int" Nullable="false" />
+          <Property Name="pv_Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProveedorSucursal">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="ps_CodigoEstablecimiento" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ps_Direccion" Type="varchar" MaxLength="500" />
+          <Property Name="ps_Telefono" Type="varchar" MaxLength="200" />
+          <Property Name="ps_Correo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ps_Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subasta">
+          <Key>
+            <PropertyRef Name="IdSubasta" />
+          </Key>
+          <Property Name="IdSubasta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="su_Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="su_Cantidad" Type="float" Nullable="false" />
+          <Property Name="su_Observacion" Type="varchar(max)" />
+          <Property Name="su_EstadoCierre" Type="bit" Nullable="false" />
+          <Property Name="su_FechaFin" Type="datetime" Nullable="false" />
+          <Property Name="su_Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="us_Clave" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="us_Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="us_Correo" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="us_Estado" Type="bit" Nullable="false" />
+          <Property Name="us_DebeCambiarClave" Type="bit" Nullable="false" />
+          <Property Name="IdPerfil" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsuarioPerfil">
+          <Key>
+            <PropertyRef Name="IdPerfil" />
+          </Key>
+          <Property Name="IdPerfil" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="up_Descripcion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Auditoria_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Auditoria" Type="Self.Auditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Auditoria">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Catalogo_CatalogoTipo">
+          <End Role="CatalogoTipo" Type="Self.CatalogoTipo" Multiplicity="1" />
+          <End Role="Catalogo" Type="Self.Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogoTipo">
+              <PropertyRef Name="IdCatalogoTipo" />
+            </Principal>
+            <Dependent Role="Catalogo">
+              <PropertyRef Name="IdCatalogoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupo_Linea">
+          <End Role="Linea" Type="Self.Linea" Multiplicity="1" />
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="IdLinea" />
+            </Principal>
+            <Dependent Role="Grupo">
+              <PropertyRef Name="IdLinea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Linea_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Linea" Type="Self.Linea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Linea">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oferta_ProveedorSucursal">
+          <End Role="ProveedorSucursal" Type="Self.ProveedorSucursal" Multiplicity="1" />
+          <End Role="Oferta" Type="Self.Oferta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorSucursal">
+              <PropertyRef Name="IdProveedor" />
+              <PropertyRef Name="Secuencia" />
+            </Principal>
+            <Dependent Role="Oferta">
+              <PropertyRef Name="IdProveedor" />
+              <PropertyRef Name="Secuencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oferta_Subasta">
+          <End Role="Subasta" Type="Self.Subasta" Multiplicity="1" />
+          <End Role="Oferta" Type="Self.Oferta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subasta">
+              <PropertyRef Name="IdSubasta" />
+            </Principal>
+            <Dependent Role="Oferta">
+              <PropertyRef Name="IdSubasta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfertaDet_Impuesto">
+          <End Role="Impuesto" Type="Self.Impuesto" Multiplicity="1" />
+          <End Role="OfertaDet" Type="Self.OfertaDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Impuesto">
+              <PropertyRef Name="IdImpuesto" />
+            </Principal>
+            <Dependent Role="OfertaDet">
+              <PropertyRef Name="IdImpuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfertaDet_Oferta">
+          <End Role="Oferta" Type="Self.Oferta" Multiplicity="1" />
+          <End Role="OfertaDet" Type="Self.OfertaDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oferta">
+              <PropertyRef Name="IdOferta" />
+            </Principal>
+            <Dependent Role="OfertaDet">
+              <PropertyRef Name="IdOferta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Catalogo">
+          <End Role="Catalogo" Type="Self.Catalogo" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdCatalogoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Catalogo1">
+          <End Role="Catalogo" Type="Self.Catalogo" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdCatalogoMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Catalogo2">
+          <End Role="Catalogo" Type="Self.Catalogo" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdCatalogoModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Impuesto">
+          <End Role="Impuesto" Type="Self.Impuesto" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Impuesto">
+              <PropertyRef Name="IdImpuesto" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdImpuestoIva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedorSucursal_Proveedor">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="ProveedorSucursal" Type="Self.ProveedorSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="IdProveedor" />
+            </Principal>
+            <Dependent Role="ProveedorSucursal">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subasta_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Subasta" Type="Self.Subasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="Subasta">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subasta_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Subasta" Type="Self.Subasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Subasta">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_UsuarioPerfil">
+          <End Role="UsuarioPerfil" Type="Self.UsuarioPerfil" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsuarioPerfil">
+              <PropertyRef Name="IdPerfil" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelGeneralStoreContainer">
+          <EntitySet Name="Auditoria" EntityType="Self.Auditoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Catalogo" EntityType="Self.Catalogo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CatalogoTipo" EntityType="Self.CatalogoTipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Impuesto" EntityType="Self.Impuesto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Linea" EntityType="Self.Linea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Oferta" EntityType="Self.Oferta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfertaDet" EntityType="Self.OfertaDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProveedorSucursal" EntityType="Self.ProveedorSucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subasta" EntityType="Self.Subasta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuarioPerfil" EntityType="Self.UsuarioPerfil" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Auditoria_Usuario" Association="Self.FK_Auditoria_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Auditoria" EntitySet="Auditoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Catalogo_CatalogoTipo" Association="Self.FK_Catalogo_CatalogoTipo">
+            <End Role="CatalogoTipo" EntitySet="CatalogoTipo" />
+            <End Role="Catalogo" EntitySet="Catalogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupo_Linea" Association="Self.FK_Grupo_Linea">
+            <End Role="Linea" EntitySet="Linea" />
+            <End Role="Grupo" EntitySet="Grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Linea_Categoria" Association="Self.FK_Linea_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Linea" EntitySet="Linea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oferta_ProveedorSucursal" Association="Self.FK_Oferta_ProveedorSucursal">
+            <End Role="ProveedorSucursal" EntitySet="ProveedorSucursal" />
+            <End Role="Oferta" EntitySet="Oferta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oferta_Subasta" Association="Self.FK_Oferta_Subasta">
+            <End Role="Subasta" EntitySet="Subasta" />
+            <End Role="Oferta" EntitySet="Oferta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfertaDet_Impuesto" Association="Self.FK_OfertaDet_Impuesto">
+            <End Role="Impuesto" EntitySet="Impuesto" />
+            <End Role="OfertaDet" EntitySet="OfertaDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfertaDet_Oferta" Association="Self.FK_OfertaDet_Oferta">
+            <End Role="Oferta" EntitySet="Oferta" />
+            <End Role="OfertaDet" EntitySet="OfertaDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Catalogo" Association="Self.FK_Producto_Catalogo">
+            <End Role="Catalogo" EntitySet="Catalogo" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Catalogo1" Association="Self.FK_Producto_Catalogo1">
+            <End Role="Catalogo" EntitySet="Catalogo" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Catalogo2" Association="Self.FK_Producto_Catalogo2">
+            <End Role="Catalogo" EntitySet="Catalogo" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Grupo" Association="Self.FK_Producto_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Impuesto" Association="Self.FK_Producto_Impuesto">
+            <End Role="Impuesto" EntitySet="Impuesto" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedorSucursal_Proveedor" Association="Self.FK_ProveedorSucursal_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="ProveedorSucursal" EntitySet="ProveedorSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subasta_Producto" Association="Self.FK_Subasta_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Subasta" EntitySet="Subasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subasta_Usuario" Association="Self.FK_Subasta_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Subasta" EntitySet="Subasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_UsuarioPerfil" Association="Self.FK_Usuario_UsuarioPerfil">
+            <End Role="UsuarioPerfil" EntitySet="UsuarioPerfil" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ModelGeneral" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Auditoria">
+          <Key>
+            <PropertyRef Name="IdAuditoria" />
+          </Key>
+          <Property Name="IdAuditoria" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="au_Pantalla" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="au_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="au_MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="au_Objeto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Auditoria_Usuario" FromRole="Auditoria" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Catalogo">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoTipo" Type="Int32" Nullable="false" />
+          <Property Name="ct_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CatalogoTipo" Relationship="Self.FK_Catalogo_CatalogoTipo" FromRole="Catalogo" ToRole="CatalogoTipo" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Catalogo" FromRole="Catalogo" ToRole="Producto" />
+          <NavigationProperty Name="Producto1" Relationship="Self.FK_Producto_Catalogo1" FromRole="Catalogo" ToRole="Producto" />
+          <NavigationProperty Name="Producto2" Relationship="Self.FK_Producto_Catalogo2" FromRole="Catalogo" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="CatalogoTipo">
+          <Key>
+            <PropertyRef Name="IdCatalogoTipo" />
+          </Key>
+          <Property Name="IdCatalogoTipo" Type="Int32" Nullable="false" />
+          <Property Name="tc_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Catalogo" Relationship="Self.FK_Catalogo_CatalogoTipo" FromRole="CatalogoTipo" ToRole="Catalogo" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+          <Property Name="ca_Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ca_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ca_Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Linea" Relationship="Self.FK_Linea_Categoria" FromRole="Categoria" ToRole="Linea" />
+        </EntityType>
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="IdGrupo" />
+          </Key>
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="IdLinea" Type="Int32" Nullable="false" />
+          <Property Name="gr_Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gr_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gr_Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Linea" Relationship="Self.FK_Grupo_Linea" FromRole="Grupo" ToRole="Linea" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Grupo" FromRole="Grupo" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Impuesto">
+          <Key>
+            <PropertyRef Name="IdImpuesto" />
+          </Key>
+          <Property Name="IdImpuesto" Type="Int32" Nullable="false" />
+          <Property Name="im_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="im_Porcentaje" Type="Double" Nullable="false" />
+          <Property Name="im_Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="OfertaDet" Relationship="Self.FK_OfertaDet_Impuesto" FromRole="Impuesto" ToRole="OfertaDet" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Impuesto" FromRole="Impuesto" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Linea">
+          <Key>
+            <PropertyRef Name="IdLinea" />
+          </Key>
+          <Property Name="IdLinea" Type="Int32" Nullable="false" />
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+          <Property Name="li_Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="li_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="li_Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_Linea_Categoria" FromRole="Linea" ToRole="Categoria" />
+          <NavigationProperty Name="Grupo" Relationship="Self.FK_Grupo_Linea" FromRole="Linea" ToRole="Grupo" />
+        </EntityType>
+        <EntityType Name="Oferta">
+          <Key>
+            <PropertyRef Name="IdOferta" />
+          </Key>
+          <Property Name="IdOferta" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSubasta" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProveedor" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="of_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="of_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="of_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="of_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="of_Plazo" Type="Int32" Nullable="false" />
+          <Property Name="of_EstadoGanador" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ProveedorSucursal" Relationship="Self.FK_Oferta_ProveedorSucursal" FromRole="Oferta" ToRole="ProveedorSucursal" />
+          <NavigationProperty Name="Subasta" Relationship="Self.FK_Oferta_Subasta" FromRole="Oferta" ToRole="Subasta" />
+          <NavigationProperty Name="OfertaDet" Relationship="Self.FK_OfertaDet_Oferta" FromRole="Oferta" ToRole="OfertaDet" />
+        </EntityType>
+        <EntityType Name="OfertaDet">
+          <Key>
+            <PropertyRef Name="IdOferta" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdOferta" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="od_Cantidad" Type="Double" Nullable="false" />
+          <Property Name="od_PrecioUni" Type="Double" Nullable="false" />
+          <Property Name="od_PorDescuento" Type="Double" Nullable="false" />
+          <Property Name="od_DescuentoUni" Type="Double" Nullable="false" />
+          <Property Name="od_PrecioFinal" Type="Double" Nullable="false" />
+          <Property Name="od_Subtotal" Type="Double" Nullable="false" />
+          <Property Name="IdImpuesto" Type="Int32" Nullable="false" />
+          <Property Name="od_Porcentaje" Type="Double" Nullable="false" />
+          <Property Name="od_Iva" Type="Double" Nullable="false" />
+          <Property Name="od_Total" Type="Double" Nullable="false" />
+          <Property Name="od_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Impuesto" Relationship="Self.FK_OfertaDet_Impuesto" FromRole="OfertaDet" ToRole="Impuesto" />
+          <NavigationProperty Name="Oferta" Relationship="Self.FK_OfertaDet_Oferta" FromRole="OfertaDet" ToRole="Oferta" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pr_Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pr_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pr_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pr_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoMarca" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoModelo" Type="Int32" Nullable="false" />
+          <Property Name="IdImpuestoIva" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Catalogo" Relationship="Self.FK_Producto_Catalogo" FromRole="Producto" ToRole="Catalogo" />
+          <NavigationProperty Name="Catalogo1" Relationship="Self.FK_Producto_Catalogo1" FromRole="Producto" ToRole="Catalogo" />
+          <NavigationProperty Name="Catalogo2" Relationship="Self.FK_Producto_Catalogo2" FromRole="Producto" ToRole="Catalogo" />
+          <NavigationProperty Name="Grupo" Relationship="Self.FK_Producto_Grupo" FromRole="Producto" ToRole="Grupo" />
+          <NavigationProperty Name="Impuesto" Relationship="Self.FK_Producto_Impuesto" FromRole="Producto" ToRole="Impuesto" />
+          <NavigationProperty Name="Subasta" Relationship="Self.FK_Subasta_Producto" FromRole="Producto" ToRole="Subasta" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProveedor" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pv_Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pv_TipoDoc" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pv_CedulaRuc" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pv_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pv_Correo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pv_Telefono" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pv_Direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pv_Plazo" Type="Int32" Nullable="false" />
+          <Property Name="pv_Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ProveedorSucursal" Relationship="Self.FK_ProveedorSucursal_Proveedor" FromRole="Proveedor" ToRole="ProveedorSucursal" />
+        </EntityType>
+        <EntityType Name="ProveedorSucursal">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdProveedor" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="ps_CodigoEstablecimiento" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ps_Direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ps_Telefono" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ps_Correo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ps_Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Oferta" Relationship="Self.FK_Oferta_ProveedorSucursal" FromRole="ProveedorSucursal" ToRole="Oferta" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.FK_ProveedorSucursal_Proveedor" FromRole="ProveedorSucursal" ToRole="Proveedor" />
+        </EntityType>
+        <EntityType Name="Subasta">
+          <Key>
+            <PropertyRef Name="IdSubasta" />
+          </Key>
+          <Property Name="IdSubasta" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="su_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="su_Cantidad" Type="Double" Nullable="false" />
+          <Property Name="su_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="su_EstadoCierre" Type="Boolean" Nullable="false" />
+          <Property Name="su_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="su_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Oferta" Relationship="Self.FK_Oferta_Subasta" FromRole="Subasta" ToRole="Oferta" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Subasta_Producto" FromRole="Subasta" ToRole="Producto" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Subasta_Usuario" FromRole="Subasta" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_Clave" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_Correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="us_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="us_DebeCambiarClave" Type="Boolean" Nullable="false" />
+          <Property Name="IdPerfil" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Auditoria" Relationship="Self.FK_Auditoria_Usuario" FromRole="Usuario" ToRole="Auditoria" />
+          <NavigationProperty Name="Subasta" Relationship="Self.FK_Subasta_Usuario" FromRole="Usuario" ToRole="Subasta" />
+          <NavigationProperty Name="UsuarioPerfil" Relationship="Self.FK_Usuario_UsuarioPerfil" FromRole="Usuario" ToRole="UsuarioPerfil" />
+        </EntityType>
+        <EntityType Name="UsuarioPerfil">
+          <Key>
+            <PropertyRef Name="IdPerfil" />
+          </Key>
+          <Property Name="IdPerfil" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="up_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_UsuarioPerfil" FromRole="UsuarioPerfil" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Auditoria_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Auditoria" Type="Self.Auditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Auditoria">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Catalogo_CatalogoTipo">
+          <End Role="CatalogoTipo" Type="Self.CatalogoTipo" Multiplicity="1" />
+          <End Role="Catalogo" Type="Self.Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatalogoTipo">
+              <PropertyRef Name="IdCatalogoTipo" />
+            </Principal>
+            <Dependent Role="Catalogo">
+              <PropertyRef Name="IdCatalogoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Catalogo">
+          <End Role="Catalogo" Type="Self.Catalogo" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdCatalogoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Catalogo1">
+          <End Role="Catalogo" Type="Self.Catalogo" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdCatalogoMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Catalogo2">
+          <End Role="Catalogo" Type="Self.Catalogo" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdCatalogoModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Linea_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Linea" Type="Self.Linea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Linea">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupo_Linea">
+          <End Role="Linea" Type="Self.Linea" Multiplicity="1" />
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="IdLinea" />
+            </Principal>
+            <Dependent Role="Grupo">
+              <PropertyRef Name="IdLinea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfertaDet_Impuesto">
+          <End Role="Impuesto" Type="Self.Impuesto" Multiplicity="1" />
+          <End Role="OfertaDet" Type="Self.OfertaDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Impuesto">
+              <PropertyRef Name="IdImpuesto" />
+            </Principal>
+            <Dependent Role="OfertaDet">
+              <PropertyRef Name="IdImpuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Impuesto">
+          <End Role="Impuesto" Type="Self.Impuesto" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Impuesto">
+              <PropertyRef Name="IdImpuesto" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdImpuestoIva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oferta_ProveedorSucursal">
+          <End Role="ProveedorSucursal" Type="Self.ProveedorSucursal" Multiplicity="1" />
+          <End Role="Oferta" Type="Self.Oferta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorSucursal">
+              <PropertyRef Name="IdProveedor" />
+              <PropertyRef Name="Secuencia" />
+            </Principal>
+            <Dependent Role="Oferta">
+              <PropertyRef Name="IdProveedor" />
+              <PropertyRef Name="Secuencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oferta_Subasta">
+          <End Role="Subasta" Type="Self.Subasta" Multiplicity="1" />
+          <End Role="Oferta" Type="Self.Oferta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subasta">
+              <PropertyRef Name="IdSubasta" />
+            </Principal>
+            <Dependent Role="Oferta">
+              <PropertyRef Name="IdSubasta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfertaDet_Oferta">
+          <End Role="Oferta" Type="Self.Oferta" Multiplicity="1" />
+          <End Role="OfertaDet" Type="Self.OfertaDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oferta">
+              <PropertyRef Name="IdOferta" />
+            </Principal>
+            <Dependent Role="OfertaDet">
+              <PropertyRef Name="IdOferta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subasta_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Subasta" Type="Self.Subasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="Subasta">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedorSucursal_Proveedor">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="ProveedorSucursal" Type="Self.ProveedorSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="IdProveedor" />
+            </Principal>
+            <Dependent Role="ProveedorSucursal">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subasta_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Subasta" Type="Self.Subasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Subasta">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_UsuarioPerfil">
+          <End Role="UsuarioPerfil" Type="Self.UsuarioPerfil" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsuarioPerfil">
+              <PropertyRef Name="IdPerfil" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntitiesGeneral" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Auditoria" EntityType="Self.Auditoria" />
+          <EntitySet Name="Catalogo" EntityType="Self.Catalogo" />
+          <EntitySet Name="CatalogoTipo" EntityType="Self.CatalogoTipo" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Grupo" EntityType="Self.Grupo" />
+          <EntitySet Name="Impuesto" EntityType="Self.Impuesto" />
+          <EntitySet Name="Linea" EntityType="Self.Linea" />
+          <EntitySet Name="Oferta" EntityType="Self.Oferta" />
+          <EntitySet Name="OfertaDet" EntityType="Self.OfertaDet" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
+          <EntitySet Name="ProveedorSucursal" EntityType="Self.ProveedorSucursal" />
+          <EntitySet Name="Subasta" EntityType="Self.Subasta" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="UsuarioPerfil" EntityType="Self.UsuarioPerfil" />
+          <AssociationSet Name="FK_Auditoria_Usuario" Association="Self.FK_Auditoria_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Auditoria" EntitySet="Auditoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Catalogo_CatalogoTipo" Association="Self.FK_Catalogo_CatalogoTipo">
+            <End Role="CatalogoTipo" EntitySet="CatalogoTipo" />
+            <End Role="Catalogo" EntitySet="Catalogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Catalogo" Association="Self.FK_Producto_Catalogo">
+            <End Role="Catalogo" EntitySet="Catalogo" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Catalogo1" Association="Self.FK_Producto_Catalogo1">
+            <End Role="Catalogo" EntitySet="Catalogo" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Catalogo2" Association="Self.FK_Producto_Catalogo2">
+            <End Role="Catalogo" EntitySet="Catalogo" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Linea_Categoria" Association="Self.FK_Linea_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Linea" EntitySet="Linea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupo_Linea" Association="Self.FK_Grupo_Linea">
+            <End Role="Linea" EntitySet="Linea" />
+            <End Role="Grupo" EntitySet="Grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Grupo" Association="Self.FK_Producto_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfertaDet_Impuesto" Association="Self.FK_OfertaDet_Impuesto">
+            <End Role="Impuesto" EntitySet="Impuesto" />
+            <End Role="OfertaDet" EntitySet="OfertaDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Impuesto" Association="Self.FK_Producto_Impuesto">
+            <End Role="Impuesto" EntitySet="Impuesto" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oferta_ProveedorSucursal" Association="Self.FK_Oferta_ProveedorSucursal">
+            <End Role="ProveedorSucursal" EntitySet="ProveedorSucursal" />
+            <End Role="Oferta" EntitySet="Oferta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oferta_Subasta" Association="Self.FK_Oferta_Subasta">
+            <End Role="Subasta" EntitySet="Subasta" />
+            <End Role="Oferta" EntitySet="Oferta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfertaDet_Oferta" Association="Self.FK_OfertaDet_Oferta">
+            <End Role="Oferta" EntitySet="Oferta" />
+            <End Role="OfertaDet" EntitySet="OfertaDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subasta_Producto" Association="Self.FK_Subasta_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Subasta" EntitySet="Subasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedorSucursal_Proveedor" Association="Self.FK_ProveedorSucursal_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="ProveedorSucursal" EntitySet="ProveedorSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subasta_Usuario" Association="Self.FK_Subasta_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Subasta" EntitySet="Subasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_UsuarioPerfil" Association="Self.FK_Usuario_UsuarioPerfil">
+            <End Role="UsuarioPerfil" EntitySet="UsuarioPerfil" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelGeneralStoreContainer" CdmEntityContainer="EntitiesGeneral">
+          <EntitySetMapping Name="Auditoria">
+            <EntityTypeMapping TypeName="ModelGeneral.Auditoria">
+              <MappingFragment StoreEntitySet="Auditoria">
+                <ScalarProperty Name="IdAuditoria" ColumnName="IdAuditoria" />
+                <ScalarProperty Name="au_Pantalla" ColumnName="au_Pantalla" />
+                <ScalarProperty Name="au_Fecha" ColumnName="au_Fecha" />
+                <ScalarProperty Name="au_MotivoAnulacion" ColumnName="au_MotivoAnulacion" />
+                <ScalarProperty Name="au_Objeto" ColumnName="au_Objeto" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Catalogo">
+            <EntityTypeMapping TypeName="ModelGeneral.Catalogo">
+              <MappingFragment StoreEntitySet="Catalogo">
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+                <ScalarProperty Name="IdCatalogoTipo" ColumnName="IdCatalogoTipo" />
+                <ScalarProperty Name="ct_Descripcion" ColumnName="ct_Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatalogoTipo">
+            <EntityTypeMapping TypeName="ModelGeneral.CatalogoTipo">
+              <MappingFragment StoreEntitySet="CatalogoTipo">
+                <ScalarProperty Name="IdCatalogoTipo" ColumnName="IdCatalogoTipo" />
+                <ScalarProperty Name="tc_Descripcion" ColumnName="tc_Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="ModelGeneral.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="ca_Codigo" ColumnName="ca_Codigo" />
+                <ScalarProperty Name="ca_Descripcion" ColumnName="ca_Descripcion" />
+                <ScalarProperty Name="ca_Estado" ColumnName="ca_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grupo">
+            <EntityTypeMapping TypeName="ModelGeneral.Grupo">
+              <MappingFragment StoreEntitySet="Grupo">
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
+                <ScalarProperty Name="gr_Codigo" ColumnName="gr_Codigo" />
+                <ScalarProperty Name="gr_Descripcion" ColumnName="gr_Descripcion" />
+                <ScalarProperty Name="gr_Estado" ColumnName="gr_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Impuesto">
+            <EntityTypeMapping TypeName="ModelGeneral.Impuesto">
+              <MappingFragment StoreEntitySet="Impuesto">
+                <ScalarProperty Name="IdImpuesto" ColumnName="IdImpuesto" />
+                <ScalarProperty Name="im_Descripcion" ColumnName="im_Descripcion" />
+                <ScalarProperty Name="im_Porcentaje" ColumnName="im_Porcentaje" />
+                <ScalarProperty Name="im_Estado" ColumnName="im_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Linea">
+            <EntityTypeMapping TypeName="ModelGeneral.Linea">
+              <MappingFragment StoreEntitySet="Linea">
+                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="li_Codigo" ColumnName="li_Codigo" />
+                <ScalarProperty Name="li_Descripcion" ColumnName="li_Descripcion" />
+                <ScalarProperty Name="li_Estado" ColumnName="li_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Oferta">
+            <EntityTypeMapping TypeName="ModelGeneral.Oferta">
+              <MappingFragment StoreEntitySet="Oferta">
+                <ScalarProperty Name="IdOferta" ColumnName="IdOferta" />
+                <ScalarProperty Name="IdSubasta" ColumnName="IdSubasta" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="of_Observacion" ColumnName="of_Observacion" />
+                <ScalarProperty Name="of_Estado" ColumnName="of_Estado" />
+                <ScalarProperty Name="of_Fecha" ColumnName="of_Fecha" />
+                <ScalarProperty Name="of_FechaFin" ColumnName="of_FechaFin" />
+                <ScalarProperty Name="of_Plazo" ColumnName="of_Plazo" />
+                <ScalarProperty Name="of_EstadoGanador" ColumnName="of_EstadoGanador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfertaDet">
+            <EntityTypeMapping TypeName="ModelGeneral.OfertaDet">
+              <MappingFragment StoreEntitySet="OfertaDet">
+                <ScalarProperty Name="IdOferta" ColumnName="IdOferta" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="od_Cantidad" ColumnName="od_Cantidad" />
+                <ScalarProperty Name="od_PrecioUni" ColumnName="od_PrecioUni" />
+                <ScalarProperty Name="od_PorDescuento" ColumnName="od_PorDescuento" />
+                <ScalarProperty Name="od_DescuentoUni" ColumnName="od_DescuentoUni" />
+                <ScalarProperty Name="od_PrecioFinal" ColumnName="od_PrecioFinal" />
+                <ScalarProperty Name="od_Subtotal" ColumnName="od_Subtotal" />
+                <ScalarProperty Name="IdImpuesto" ColumnName="IdImpuesto" />
+                <ScalarProperty Name="od_Porcentaje" ColumnName="od_Porcentaje" />
+                <ScalarProperty Name="od_Iva" ColumnName="od_Iva" />
+                <ScalarProperty Name="od_Total" ColumnName="od_Total" />
+                <ScalarProperty Name="od_Observacion" ColumnName="od_Observacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="ModelGeneral.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="pr_Codigo" ColumnName="pr_Codigo" />
+                <ScalarProperty Name="pr_Descripcion" ColumnName="pr_Descripcion" />
+                <ScalarProperty Name="pr_Observacion" ColumnName="pr_Observacion" />
+                <ScalarProperty Name="pr_Estado" ColumnName="pr_Estado" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="IdCatalogoTipo" ColumnName="IdCatalogoTipo" />
+                <ScalarProperty Name="IdCatalogoMarca" ColumnName="IdCatalogoMarca" />
+                <ScalarProperty Name="IdCatalogoModelo" ColumnName="IdCatalogoModelo" />
+                <ScalarProperty Name="IdImpuestoIva" ColumnName="IdImpuestoIva" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedor">
+            <EntityTypeMapping TypeName="ModelGeneral.Proveedor">
+              <MappingFragment StoreEntitySet="Proveedor">
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="pv_Codigo" ColumnName="pv_Codigo" />
+                <ScalarProperty Name="pv_TipoDoc" ColumnName="pv_TipoDoc" />
+                <ScalarProperty Name="pv_CedulaRuc" ColumnName="pv_CedulaRuc" />
+                <ScalarProperty Name="pv_Descripcion" ColumnName="pv_Descripcion" />
+                <ScalarProperty Name="pv_Correo" ColumnName="pv_Correo" />
+                <ScalarProperty Name="pv_Telefono" ColumnName="pv_Telefono" />
+                <ScalarProperty Name="pv_Direccion" ColumnName="pv_Direccion" />
+                <ScalarProperty Name="pv_Plazo" ColumnName="pv_Plazo" />
+                <ScalarProperty Name="pv_Estado" ColumnName="pv_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedorSucursal">
+            <EntityTypeMapping TypeName="ModelGeneral.ProveedorSucursal">
+              <MappingFragment StoreEntitySet="ProveedorSucursal">
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="ps_CodigoEstablecimiento" ColumnName="ps_CodigoEstablecimiento" />
+                <ScalarProperty Name="ps_Direccion" ColumnName="ps_Direccion" />
+                <ScalarProperty Name="ps_Telefono" ColumnName="ps_Telefono" />
+                <ScalarProperty Name="ps_Correo" ColumnName="ps_Correo" />
+                <ScalarProperty Name="ps_Estado" ColumnName="ps_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subasta">
+            <EntityTypeMapping TypeName="ModelGeneral.Subasta">
+              <MappingFragment StoreEntitySet="Subasta">
+                <ScalarProperty Name="IdSubasta" ColumnName="IdSubasta" />
+                <ScalarProperty Name="su_Descripcion" ColumnName="su_Descripcion" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="su_Cantidad" ColumnName="su_Cantidad" />
+                <ScalarProperty Name="su_Observacion" ColumnName="su_Observacion" />
+                <ScalarProperty Name="su_EstadoCierre" ColumnName="su_EstadoCierre" />
+                <ScalarProperty Name="su_FechaFin" ColumnName="su_FechaFin" />
+                <ScalarProperty Name="su_Estado" ColumnName="su_Estado" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ModelGeneral.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="us_Clave" ColumnName="us_Clave" />
+                <ScalarProperty Name="us_Descripcion" ColumnName="us_Descripcion" />
+                <ScalarProperty Name="us_Correo" ColumnName="us_Correo" />
+                <ScalarProperty Name="us_Estado" ColumnName="us_Estado" />
+                <ScalarProperty Name="us_DebeCambiarClave" ColumnName="us_DebeCambiarClave" />
+                <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuarioPerfil">
+            <EntityTypeMapping TypeName="ModelGeneral.UsuarioPerfil">
+              <MappingFragment StoreEntitySet="UsuarioPerfil">
+                <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
+                <ScalarProperty Name="up_Descripcion" ColumnName="up_Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
