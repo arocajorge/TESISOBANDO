@@ -1,0 +1,71 @@
+﻿@model Core.Info.General.Grupo_Info
+@{
+    ViewBag.Title = "Nuevo grupo ";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Nuevo", "Grupo", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q=>q.IdGrupo)
+    @Html.HiddenFor(q => q.IdLinea)
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="gr_Codigo">Código</label>
+                    @Html.TextBoxFor(q => q.gr_Codigo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.gr_Codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="IdLinea">Tipo catálogo*</label>
+                    @Html.HiddenFor(q => q.IdLinea)
+                    @Html.DevExpress().ComboBoxFor(q => q.IdLinea, settings =>
+               {
+                   settings.Name = "IdLinea";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdLinea", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("li_Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdLinea";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "li_Descripcion";
+                   settings.Properties.NullText = "== Seleccione ==";
+
+                   settings.Properties.DropDownButton.Enabled = false;
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.ReadOnly = true;
+               }).BindList(ViewBag.lst_linea).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdLinea, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="gr_Descripcion">Descripción*</label>
+                    @Html.TextBoxFor(q => q.gr_Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.gr_Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Grupo", new { IdLinea = Model.IdLinea  },null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

@@ -1,0 +1,45 @@
+﻿@model Core.Info.General.Categoria_Info
+@{
+    ViewBag.Title = "Modificar categoria ";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Modificar", "Categoria", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q=>q.IdCategoria)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ca_Codigo">Código</label>
+                    @Html.TextBoxFor(q => q.ca_Codigo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ca_Codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ca_Descripcion">Descripción*</label>
+                    @Html.TextBoxFor(q => q.ca_Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ca_Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Categoria",null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

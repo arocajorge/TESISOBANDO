@@ -1,0 +1,123 @@
+﻿@model Core.Info.General.Proveedor_Info
+@{
+    ViewBag.Title = "Modificar proveedor";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Modificar", "Proveedor", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q=>q.IdProveedor)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="ca_Codigo">Código</label>
+                    @Html.TextBoxFor(q => q.pv_Codigo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.pv_Codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="info_persona.pv_TipoDoc">Tipo documento*</label>
+                    @Html.DropDownListFor(q => q.pv_TipoDoc, new SelectList(ViewBag.lst_tipo_doc, "IdCatalogo", "ct_Descripcion"), new { @class = "form-control", @id = "pv_TipoDoc" })
+                    @Html.ValidationMessageFor(q => q.pv_TipoDoc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="pv_CedulaRuc">Número documento*</label>
+                    @Html.TextBoxFor(q => q.pv_CedulaRuc, new { @class = "form-control", @id = "pv_CedulaRuc" })
+                    @Html.ValidationMessageFor(q => q.pv_CedulaRuc, "", new { @class = "text-danger" })
+                    <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ca_Descripcion">Descripción*</label>
+                    @Html.TextBoxFor(q => q.pv_Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.pv_Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pv_Correo">Correo*</label>
+                    @Html.TextBoxFor(q => q.pv_Correo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.pv_Correo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pv_Telefono">Telefono</label>
+                    @Html.TextBoxFor(q => q.pv_Telefono, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.pv_Telefono, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pv_Direccion">Dirección</label>
+                    @Html.TextBoxFor(q => q.pv_Direccion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.pv_Direccion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pv_Plazo">Plazo*</label>
+                    @Html.TextBoxFor(q => q.pv_Plazo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.pv_Plazo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Categoria",null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    $("#pv_CedulaRuc").keyup(function () {
+        var tipo_doc = $("#pv_TipoDoc").val();
+        var cedula = $("#pv_CedulaRuc").val();
+
+        if (tipo_doc == "RUC") {
+            if (cedula.length > 13) {
+                var len = $("#pv_CedulaRuc").val();
+                len = len.substring(0, 13);
+                $("#pv_CedulaRuc").val(len);
+            }
+
+        }
+        else
+            if (tipo_doc == "CED") {
+                if (cedula.length > 10) {
+                    var len = $("#pv_CedulaRuc").val();
+                    len = len.substring(0, 10);
+                    $("#pv_CedulaRuc").val(len);
+                }
+            }
+    });
+
+</script>

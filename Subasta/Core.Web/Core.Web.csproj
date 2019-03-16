@@ -190,7 +190,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CatalogoController.cs" />
+    <Compile Include="Controllers\CatalogoTipoController.cs" />
+    <Compile Include="Controllers\CategoriaController.cs" />
+    <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
+    <Compile Include="Controllers\LineaController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -7082,6 +7089,37 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Inicio\Index.cshtml" />
+    <Content Include="Views\CatalogoTipo\Index.cshtml" />
+    <Content Include="Views\CatalogoTipo\_GridViewPartial_catalogo_tipo.cshtml" />
+    <Content Include="Views\CatalogoTipo\Nuevo.cshtml" />
+    <Content Include="Views\CatalogoTipo\Modificar.cshtml" />
+    <Content Include="Views\Catalogo\_GridViewPartial_catalogo_.cshtml" />
+    <Content Include="Views\Catalogo\Index.cshtml" />
+    <Content Include="Views\Catalogo\Nuevo.cshtml" />
+    <Content Include="Views\Catalogo\Modificar.cshtml" />
+    <Content Include="Views\Catalogo\Anular.cshtml" />
+    <Content Include="Views\Categoria\Index.cshtml" />
+    <Content Include="Views\Categoria\_GridViewPartial_categoria.cshtml" />
+    <Content Include="Views\Categoria\Nuevo.cshtml" />
+    <Content Include="Views\Categoria\Modificar.cshtml" />
+    <Content Include="Views\Categoria\Anular.cshtml" />
+    <Content Include="Views\Linea\_GridViewPartial_Linea.cshtml" />
+    <Content Include="Views\Linea\Index.cshtml" />
+    <Content Include="Views\Linea\Nuevo.cshtml" />
+    <Content Include="Views\Linea\Modificar.cshtml" />
+    <Content Include="Views\Linea\Anular.cshtml" />
+    <Content Include="Views\Grupo\Index.cshtml" />
+    <Content Include="Views\Grupo\_GridViewPartial_grupo.cshtml" />
+    <Content Include="Views\Grupo\Nuevo.cshtml" />
+    <Content Include="Views\Grupo\Modificar.cshtml" />
+    <Content Include="Views\Grupo\Anular.cshtml" />
+    <Content Include="Views\Producto\Index.cshtml" />
+    <Content Include="Views\Producto\_GridViewPartial_producto.cshtml" />
+    <Content Include="Views\Proveedor\_GridViewPartial_Proveedor.cshtml" />
+    <Content Include="Views\Proveedor\Index.cshtml" />
+    <Content Include="Views\Proveedor\Nuevo.cshtml" />
+    <Content Include="Views\Proveedor\Modificar.cshtml" />
+    <Content Include="Views\Proveedor\Anular.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -25,14 +25,15 @@ namespace Core.Web.Controllers
                 SessionFixed.IdUsuario = info_usuario.IdUsuario;
                 SessionFixed.NombreUsuario = info_usuario.us_Descripcion;
 
-                SessionFixed.IdTransaccionSession = string.IsNullOrEmpty(SessionFixed.IdTransaccionSession) ? "1" : (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-                SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+                //SessionFixed.IdTransaccionSession = string.IsNullOrEmpty(SessionFixed.IdTransaccionSession) ? "1" : (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+                //SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+                return View(model);
 
-                return RedirectToAction("Index", "Inicio");
             }
-            
+
             ViewBag.mensaje = "Credenciales incorrectas";
-            return View(model);
+            return RedirectToAction("Index", "Inicio");
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

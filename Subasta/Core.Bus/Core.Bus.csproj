@@ -40,6 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="General\CatalogoTipo_Bus.cs" />
+    <Compile Include="General\Catalogo_Bus.cs" />
+    <Compile Include="General\Categoria_Bus.cs" />
+    <Compile Include="General\Grupo_Bus.cs" />
+    <Compile Include="General\Impuesto_Bus.cs" />
+    <Compile Include="General\Linea_Bus.cs" />
+    <Compile Include="General\OfertaDet_Bus.cs" />
+    <Compile Include="General\Oferta_Bus.cs" />
+    <Compile Include="General\Producto_Bus.cs" />
+    <Compile Include="General\ProveedorSucursal_Bus.cs" />
+    <Compile Include="General\Proveedor_Bus.cs" />
+    <Compile Include="General\Subasta_Bus.cs" />
     <Compile Include="General\Usuario_Bus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

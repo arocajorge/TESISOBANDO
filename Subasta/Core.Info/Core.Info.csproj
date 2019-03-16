@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,6 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="General\CatalogoTipo_Info.cs" />
+    <Compile Include="General\Catalogo_Info.cs" />
+    <Compile Include="General\Categoria_Info.cs" />
+    <Compile Include="General\Grupo_Info.cs" />
+    <Compile Include="General\Impuesto_Info.cs" />
+    <Compile Include="General\Linea_Info.cs" />
+    <Compile Include="General\OfertaDet_Info.cs" />
+    <Compile Include="General\Oferta_Info.cs" />
+    <Compile Include="General\Producto_Info.cs" />
+    <Compile Include="General\ProveedorSucursal_Info.cs" />
+    <Compile Include="General\Proveedor_Info.cs" />
+    <Compile Include="General\Subasta_Info.cs" />
     <Compile Include="General\Usuario_Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
