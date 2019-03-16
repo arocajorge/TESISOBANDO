@@ -23,12 +23,6 @@ namespace Core.Web.Controllers
             return PartialView("_GridViewPartial_Proveedor", model);
         }
 
-        private void cargar_combos(int IdCatalogoTipo = 0)
-        {
-            Catalogo_Bus bus_cat = new Catalogo_Bus();
-            var lst_tipo_doc = bus_cat.GetList(IdCatalogoTipo, false);
-            ViewBag.lst_tipo_doc = lst_tipo_doc;
-        }
         #region Acciones
 
         public ActionResult Nuevo()

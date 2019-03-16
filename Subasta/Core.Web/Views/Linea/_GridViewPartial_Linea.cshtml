@@ -52,7 +52,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
+            if (Convert.ToBoolean(e.GetValue("li_Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -62,7 +62,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "li_Estado")) == true)
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdLinea = DataBinder.Eval(tc.DataItem, "IdLinea"), IdCategoria = ViewBag.IdCategoria }) + "&nbsp;" +
@@ -83,14 +83,14 @@
         });
 
 
-        settings.Columns.Add("IdCategoria", "ID").Width = Unit.Percentage(20);
-        settings.Columns.Add("li_Codigo", "Código").Width = Unit.Percentage(20);
-        settings.Columns.Add("li_Descripcion", "Descripción").Width = Unit.Percentage(60);
+        settings.Columns.Add("IdCategoria", "ID").Width = Unit.Percentage(15);
+        settings.Columns.Add("li_Codigo", "Código").Width = Unit.Percentage(15);
+        settings.Columns.Add("li_Descripcion", "Descripción").Width = Unit.Percentage(40);
         settings.Columns.Add(column =>
         {
             column.FieldName = "li_Estado";
             column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {
 
@@ -103,13 +103,14 @@
             column.Width = Unit.Pixel(120);
             column.SetDataItemTemplateContent(container =>
             {
-                if (Convert.ToString(DataBinder.Eval(container.DataItem, "Estado")) == "A")
+                if (Convert.ToBoolean(DataBinder.Eval(container.DataItem, "li_Estado")) == true)
                 {
                     Html.DevExpress().HyperLink(hyperlink =>
                     {
                         var IdLinea = DataBinder.Eval(container.DataItem, "IdLinea");
+                        var IdCategoria = DataBinder.Eval(container.DataItem, "IdCategoria");
                         hyperlink.Properties.Text = "Grupos";
-                        hyperlink.NavigateUrl = Url.Action("Index", "Grupo", new { IdLinea = IdLinea });
+                        hyperlink.NavigateUrl = Url.Action("Index", "Grupo", new { IdCategoria = IdCategoria, IdLinea = IdLinea });
                     }).Render();
                 }
             });

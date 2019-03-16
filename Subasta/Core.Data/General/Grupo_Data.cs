@@ -65,7 +65,9 @@ namespace Core.Data.General
                         IdGrupo = Entity.IdGrupo,
                         gr_Codigo = Entity.gr_Codigo,
                         gr_Descripcion = Entity.gr_Descripcion,
-                        gr_Estado = Entity.gr_Estado
+                        gr_Estado = Entity.gr_Estado,
+
+                        IdCategoria = Entity.Linea.IdCategoria
                     };
                 }
                 return info;
@@ -77,15 +79,14 @@ namespace Core.Data.General
             }
         }
 
-        private int GetId(int IdLinea)
+        private int GetId()
         {
             try
             {
                 int Id = 1;
                 using (EntitiesGeneral db = new EntitiesGeneral())
                 {
-                    var lst = from q in db.Grupo
-                              where q.IdLinea == IdLinea
+                    var lst = from q in db.Grupo                              
                               select q;
                     if (lst.Count() > 0)
                         Id = lst.Max(q => q.IdGrupo) + 1;
@@ -108,7 +109,7 @@ namespace Core.Data.General
                     db.Grupo.Add(new Grupo
                     {
                         IdLinea = info.IdLinea,
-                        IdGrupo = info.IdGrupo=GetId(info.IdLinea),
+                        IdGrupo = info.IdGrupo=GetId(),
                         gr_Codigo = info.gr_Codigo,
                         gr_Descripcion = info.gr_Descripcion,
                         gr_Estado = true

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="~/AdminLTE/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="~/AdminLTE/dist/css/skins/skin-green-light.min.css">
+    <link rel="stylesheet" href="~/AdminLTE/dist/css/skins/skin-purple-light.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="~/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- Bootstrap DatePicker -->
     <script src="~/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="~/Scripts/moment.min.js"></script>
+    
     <script src="~/Scripts/ScriptsGenerales.js"></script>
     @RenderSection("scripts", required: false)
     @Html.DevExpress().GetStyleSheets(
@@ -57,15 +57,15 @@
             new Script { ExtensionSuite = ExtensionSuite.TreeList }
         )
 </head>
-<body class="skin-green-light layout-top-nav">
+<body class="sidebar-mini skin-purple-light" style="height: auto; min-height: 100%;">
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
             <a href="#" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>D</b>G</span>
+                <span class="logo-mini"><b>SUBASTAS</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>SUBASTA INVERSA</b></span>
+                <span class="logo-lg"><b>SUBASTAS</b></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -78,15 +78,15 @@
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-
-                        <li><a href="/General/Buzon/Buzon_entrada" title="Asignadas"><i class="fa fa fa-envelope text-white"></i></a></li>
-                        <li><a href="/General/Buzon/Buzon_salida" title="Enviadas"><i class="fa fa-upload text-white"></i> </a></li>
-                        <li><a href="/General/MisTareas/CargaLaboral" title="Estadísticas"><i class="fa fa-line-chart text-white"></i></a></li>
-
+                        @*
+    <li><a href="/General/Buzon/Buzon_entrada" title="Asignadas"><i class="fa fa fa-envelope text-white"></i></a></li>
+    <li><a href="/General/Buzon/Buzon_salida" title="Enviadas"><i class="fa fa-upload text-white"></i> </a></li>
+    <li><a href="/General/MisTareas/CargaLaboral" title="Estadísticas"><i class="fa fa-line-chart text-white"></i></a></li>
+                        *@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs">Usuario: @Core.Erp.Web.Helps.SessionFixed.NombreUsuario</span>
+                                <span class="hidden-xs">@Core.Erp.Web.Helps.SessionFixed.NombreUsuario</span>
                             </a>
                         </li>
                         <li>
@@ -102,12 +102,12 @@
             <section class="sidebar">
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">NAVEGACION</li>
+                    <li class="header">Navegación</li>
 
                     <li class="treeview active">
                         <a href="#">
                             <i class="fa fa-files-o"></i>
-                            <span>MENÚ</span>
+                            <span>Menú</span>
                         </a>
                         <ul class="treeview-menu">
                             <li class="treeview">
@@ -119,11 +119,10 @@
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-
-                                    <li><a href="/General/Categoria/Index"><i class="fa fa-circle-o"></i>Categoría</a></li>
-                                    <li><a href="/General/CatalogoTipo/Index"><i class="fa fa-circle-o"></i>Tipo de catálogos</a></li>
-                                    <li><a href="/General/Producto/Index"><i class="fa fa-circle-o"></i>Producto</a></li>
-                                    <li><a href="/General/Proveedor/Index"><i class="fa fa-circle-o"></i>Proveedor</a></li>
+                                    <li><a href="/CatalogoTipo/Index"><i class="fa fa-circle-o"></i>Catálogos</a></li>
+                                    <li><a href="/Categoria/Index"><i class="fa fa-circle-o"></i>Categorización</a></li>
+                                    <li><a href="/Producto/Index"><i class="fa fa-circle-o"></i>Productos</a></li>
+                                    <li><a href="/Proveedor/Index"><i class="fa fa-circle-o"></i>Proveedores</a></li>
                                 </ul>
                             </li>
                             <li class="treeview active">
@@ -145,8 +144,7 @@
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
                                 </a>
-                                <ul class="treeview-menu active">
-                                </ul>
+                                <ul class="treeview-menu active"></ul>
                             </li>
 
 

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumeradores.cs" />
     <Compile Include="General\CatalogoTipo_Info.cs" />
     <Compile Include="General\Catalogo_Info.cs" />
     <Compile Include="General\Categoria_Info.cs" />

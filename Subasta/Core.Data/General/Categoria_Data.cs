@@ -104,7 +104,7 @@ namespace Core.Data.General
                 {
                     db.Categoria.Add(new Categoria
                     {
-                        IdCategoria = info.IdCategoria,
+                        IdCategoria = info.IdCategoria = GetId(),
                         ca_Codigo = info.ca_Codigo,
                         ca_Descripcion = info.ca_Descripcion,
                         ca_Estado = true

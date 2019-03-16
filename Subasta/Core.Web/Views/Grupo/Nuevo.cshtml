@@ -1,7 +1,7 @@
 ﻿@model Core.Info.General.Grupo_Info
 @{
     ViewBag.Title = "Nuevo grupo ";
-    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    if (string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdUsuario))
     {
         Response.Redirect("~/Account/Login");
     }
@@ -10,7 +10,7 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "Grupo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdGrupo)
+    @Html.HiddenFor(q=> q.IdCategoria)
     @Html.HiddenFor(q => q.IdLinea)
     <div class="row">
         <div class="col-md-12">
@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-9">
                 <div class="form-group">
-                    <label for="IdLinea">Tipo catálogo*</label>
+                    <label for="IdLinea">Linea*</label>
                     @Html.HiddenFor(q => q.IdLinea)
                     @Html.DevExpress().ComboBoxFor(q => q.IdLinea, settings =>
                {
@@ -62,7 +62,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Grupo", new { IdLinea = Model.IdLinea  },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","Grupo", new { IdCategoria = Model.IdCategoria, IdLinea = Model.IdLinea  },null)">Cancelar</a>
     </div>
 
     @section Scripts {

@@ -103,9 +103,9 @@ namespace Core.Data.General
                 {
                     db.Catalogo.Add(new Catalogo
                     {
-                        IdCatalogoTipo = info.IdCatalogoTipo = GetId(),
+                        IdCatalogoTipo = info.IdCatalogoTipo,
                         ct_Descripcion = info.ct_Descripcion,
-                        IdCatalogo = info.IdCatalogo,
+                        IdCatalogo = info.IdCatalogo = GetId(),
                         Estado = true
                     });
                     db.SaveChanges();

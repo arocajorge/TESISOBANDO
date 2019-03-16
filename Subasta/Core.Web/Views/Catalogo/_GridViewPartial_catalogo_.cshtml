@@ -83,13 +83,13 @@
         });
 
 
-        settings.Columns.Add("IdCatalogoTipo", "Código").Width = Unit.Percentage(20);
+        settings.Columns.Add("IdCatalogo", "Código").Width = Unit.Percentage(20);
         settings.Columns.Add("ct_Descripcion", "Descripción").Width = Unit.Percentage(60);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";
             column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {
 

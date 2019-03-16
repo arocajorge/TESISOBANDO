@@ -2,9 +2,8 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_Categoria";
-        settings.CallbackRouteValues = new { Controller = "Categoria", Action = "GridViewPartial_categoria" };
-
+        settings.Name = "GridViewCategorias";
+        settings.CallbackRouteValues = new { Controller = "Categoria", Action = "GridViewPartialCategorias" };
         settings.KeyFieldName = "IdCategoria";
         settings.Width = Unit.Percentage(100);
 
@@ -52,7 +51,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
+            if (Convert.ToBoolean(e.GetValue("ca_Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -62,7 +61,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "ca_Estado")) == true)
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdCategoria = DataBinder.Eval(tc.DataItem, "IdCategoria") }) + "&nbsp;" +
@@ -84,13 +83,12 @@
 
 
         settings.Columns.Add("IdCategoria", "ID").Width = Unit.Percentage(20);
-        settings.Columns.Add("ca_Codigo", "Código").Width = Unit.Percentage(20);
         settings.Columns.Add("ca_Descripcion", "Descripción").Width = Unit.Percentage(60);
         settings.Columns.Add(column =>
         {
             column.FieldName = "ca_Estado";
             column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {
 
@@ -98,7 +96,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.Caption = "Línea";
+            column.Caption = "Líneas";
             column.Width = Unit.Pixel(100);
             column.SetDataItemTemplateContent(container =>
             {
@@ -112,3 +110,4 @@
         });
     });
 }
+@grid.Bind(Model).GetHtml()

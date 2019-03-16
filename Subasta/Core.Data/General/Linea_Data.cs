@@ -75,15 +75,14 @@ namespace Core.Data.General
             }
         }
 
-        private int GetId(int IdCategoria)
+        private int GetId()
         {
             try
             {
                 int Id = 1;
                 using (EntitiesGeneral db = new EntitiesGeneral())
                 {
-                    var lst = from q in db.Linea
-                              where q.IdCategoria == IdCategoria
+                    var lst = from q in db.Linea                              
                               select q;
                     if (lst.Count() > 0)
                         Id = lst.Max(q => q.IdLinea) + 1;
@@ -105,7 +104,7 @@ namespace Core.Data.General
                 {
                     db.Linea.Add(new Linea
                     {
-                        IdLinea = info.IdLinea=GetId(info.IdCategoria),
+                        IdLinea = info.IdLinea=GetId(),
                         IdCategoria = info.IdCategoria,
                         li_Codigo = info.li_Codigo,
                         li_Descripcion = info.li_Descripcion,

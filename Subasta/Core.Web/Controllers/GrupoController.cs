@@ -14,20 +14,22 @@ namespace Core.Web.Controllers
 
         Grupo_Bus bus_grupo = new Grupo_Bus();
         Linea_Bus bus_linea = new Linea_Bus();
-        public ActionResult Index( int IdLinea = 0)
+        public ActionResult Index(int IdCategoria = 0, int IdLinea = 0)
         {
             ViewBag.IdLinea = IdLinea;
+            ViewBag.IdCategoria = IdCategoria;
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_grupo( int IdLinea = 0)
+        public ActionResult GridViewPartial_grupo(int IdCategoria = 0, int IdLinea = 0)
         {
             ViewBag.IdLinea = IdLinea;
+            ViewBag.IdCategoria = IdCategoria;
             var model = bus_grupo.GetList(IdLinea, true);
             return PartialView("_GridViewPartial_grupo", model);
         }
-        private void cargar_combos(int IdCategoria = 0)
+        private void cargar_combos(int IdCategoria)
         {
             var lst_linea = bus_linea.GetList(IdCategoria, false);
             ViewBag.lst_linea = lst_linea;
@@ -37,14 +39,14 @@ namespace Core.Web.Controllers
         #endregion
         #region Acciones
 
-        public ActionResult Nuevo( int IdLinea = 0)
+        public ActionResult Nuevo(int IdCategoria = 0, int IdLinea = 0)
         {
             Grupo_Info model = new Grupo_Info
             {
+                IdCategoria = IdCategoria,
                 IdLinea = IdLinea
             };
-            ViewBag.IdLinea = IdLinea;
-            cargar_combos();
+            cargar_combos(model.IdCategoria);
             return View(model);
         }
 
@@ -53,22 +55,19 @@ namespace Core.Web.Controllers
         {
             if (!bus_grupo.GuardarDB(model))
             {
-                 
-                ViewBag.IdLinea = model.IdLinea;
-                cargar_combos();
+                cargar_combos(model.IdCategoria);
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdLinea = model.IdLinea });
+            return RedirectToAction("Index", new {IdCategoria = model.IdCategoria, IdLinea = model.IdLinea });
         }
-        public ActionResult Modificar( int IdLinea = 0, int IdGrupo = 0)
+        public ActionResult Modificar(int IdCategoria = 0, int IdLinea = 0, int IdGrupo = 0)
         {
             Grupo_Info model = bus_grupo.GetInfo(IdLinea, IdGrupo);
             if (model == null)
             {
-                ViewBag.IdLinea = IdLinea;
-                return RedirectToAction("Index", new {  IdLinea = IdLinea });
+                return RedirectToAction("Index", new {IdCategoria = IdCategoria, IdLinea = IdLinea });
             }
-            cargar_combos( );
+            cargar_combos(model.IdCategoria);
             return View(model);
         }
 
@@ -77,22 +76,19 @@ namespace Core.Web.Controllers
         {
             if (!bus_grupo.ModificarDB(model))
             {
-                 
-                ViewBag.IdLinea = model.IdLinea;
-                cargar_combos();
+                cargar_combos(model.IdCategoria);
                 return View(model);
             }
-            return RedirectToAction("Index", new {  IdLinea = model.IdLinea });
+            return RedirectToAction("Index", new {IdCategoria = model.IdCategoria, IdLinea = model.IdLinea });
         }
-        public ActionResult Anular( int IdLinea = 0, int IdGrupo = 0)
+        public ActionResult Anular(int IdCategoria = 0, int IdLinea = 0, int IdGrupo = 0)
         {
             Grupo_Info model = bus_grupo.GetInfo(IdLinea, IdGrupo);
             if (model == null)
             {
-                ViewBag.IdLinea = IdLinea;
-                return RedirectToAction("Index", new {  IdLinea = IdLinea });
+                return RedirectToAction("Index", new {IdCategoria = model.IdCategoria,  IdLinea = IdLinea });
             }
-            cargar_combos( );
+            cargar_combos(model.IdCategoria);
             return View(model);
         }
 
@@ -101,12 +97,10 @@ namespace Core.Web.Controllers
         {
             if (!bus_grupo.AnularDB(model))
             {
-                 
-                ViewBag.IdLinea = model.IdLinea;
-                cargar_combos();
+                cargar_combos(model.IdCategoria);
                 return View(model);
             }
-            return RedirectToAction("Index", new {  IdLinea = model.IdLinea });
+            return RedirectToAction("Index", new { IdCategoria = model.IdCategoria, IdLinea = model.IdLinea });
         }
         #endregion
     }

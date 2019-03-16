@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_grupo";
-        settings.CallbackRouteValues = new { Controller = "Grupo", Action = "GridViewPartial_grupo", IdGrupo = ViewBag.IdGrupo };
+        settings.CallbackRouteValues = new { Controller = "Grupo", Action = "GridViewPartial_grupo", IdCategoria = ViewBag.IdCategoria, IdLinea = ViewBag.IdLinea };
 
         settings.KeyFieldName = "IdGrupo";
         settings.Width = Unit.Percentage(100);
@@ -52,7 +52,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
+            if (Convert.ToBoolean(e.GetValue("gr_Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -62,7 +62,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "gr_Estado")) == true)
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdGrupo = DataBinder.Eval(tc.DataItem, "IdGrupo"), IdLinea = ViewBag.IdLinea }) + "&nbsp;" +
@@ -74,7 +74,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdLinea = ViewBag.IdLinea }).ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdCategoria = ViewBag.IdCategoria, IdLinea = ViewBag.IdLinea }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
@@ -83,14 +83,14 @@
         });
 
 
-        settings.Columns.Add("IdGrupo", "ID").Width = Unit.Percentage(20);
-        settings.Columns.Add("gr_Codigo", "Código").Width = Unit.Percentage(20);
-        settings.Columns.Add("gr_Descripcion", "Descripción").Width = Unit.Percentage(60);
+        settings.Columns.Add("IdGrupo", "ID").Width = Unit.Percentage(15);
+        settings.Columns.Add("gr_Codigo", "Código").Width = Unit.Percentage(15);
+        settings.Columns.Add("gr_Descripcion", "Descripción").Width = Unit.Percentage(50);
         settings.Columns.Add(column =>
         {
             column.FieldName = "gr_Estado";
             column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {
 

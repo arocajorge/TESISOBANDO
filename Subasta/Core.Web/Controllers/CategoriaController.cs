@@ -11,19 +11,11 @@ namespace Core.Web.Controllers
 {
     public class CategoriaController : Controller
     {
-        Categoria_Bus bus_categoria= new Categoria_Bus();
+        Categoria_Bus bus_categoria = new Categoria_Bus();
         public ActionResult Index()
         {
             return View();
         }
-
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_categoria()
-        {
-            var model = bus_categoria.GetList(true);
-            return PartialView("_GridViewPartial_categoria", model);
-        }
-
         #region Acciones
 
         public ActionResult Nuevo()
@@ -42,7 +34,7 @@ namespace Core.Web.Controllers
 
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar( int IdCategoria = 0)
+        public ActionResult Modificar(int IdCategoria = 0)
         {
             Categoria_Info model = bus_categoria.GetInfo(IdCategoria);
             if (model == null)
@@ -80,5 +72,11 @@ namespace Core.Web.Controllers
         }
         #endregion
 
+        [ValidateInput(false)]
+        public ActionResult GridViewPartialCategorias()
+        {
+            var model = bus_categoria.GetList(true);
+            return PartialView("_GridViewPartialCategorias", model);
+        }
     }
 }
