@@ -1,0 +1,24 @@
+﻿
+@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdGrupo";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Percentage(100);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "Producto", Action = "CmbGrupo"};
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "gr_Descripcion";
+        settings.Properties.TextFormatString = "[{0}] {1}";
+        settings.Properties.ValueField = "IdGrupo";
+        settings.Properties.ValueType = typeof(int);
+        settings.Properties.Columns.Add("IdGrupo", "ID", 10);
+        settings.Properties.Columns.Add("gr_Descripcion", "Grupo", 90);
+        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdLinea'] =  IdLinea.GetValue(); }";
+    })
+     .BindList(new Core.Web.Controllers.ProductoController().GetListGrupo, new Core.Web.Controllers.ProductoController().GetInfoGrupo)
+    .Bind((Model.GetType() == typeof(Core.Info.General.Producto_Info) || Model.GetType() == typeof(Core.Info.General.Producto_Info) || Model.GetType() == typeof(List<Core.Info.General.Producto_Info>)) || Model == 0 ? "" : Model);
+}
+@comboBox.GetHtml()

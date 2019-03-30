@@ -16,6 +16,10 @@ namespace Core.Info.General
         public string pr_Descripcion { get; set; }
         public string pr_Observacion { get; set; }
         public bool pr_Estado { get; set; }
+        [Required(ErrorMessage = "El campo categoría es obligatorio")]
+        public int IdCategoria { get; set; }
+        [Required(ErrorMessage = "El campo linea es obligatorio")]
+        public int IdLinea { get; set; }
         [Required(ErrorMessage = "El campo grupo es obligatorio")]
         public int IdGrupo { get; set; }
         [Required(ErrorMessage = "El campo tipo es obligatorio")]

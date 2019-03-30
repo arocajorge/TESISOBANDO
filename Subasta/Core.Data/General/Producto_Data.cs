@@ -65,21 +65,27 @@ namespace Core.Data.General
                 Producto_Info info = new Producto_Info();
                 using (EntitiesGeneral db = new EntitiesGeneral())
                 {
-                    Producto Entity = db.Producto.Where(q => q.IdProducto == IdProducto).FirstOrDefault();
-                    if (Entity == null) return null;
-                    info = new Producto_Info
-                    {
-                        IdProducto = Entity.IdProducto,
-                        pr_Descripcion = Entity.pr_Descripcion,
-                        pr_Observacion = Entity.pr_Observacion,
-                        IdCatalogoMarca = Entity.IdCatalogoMarca,
-                        IdCatalogoModelo = Entity.IdCatalogoModelo,
-                        IdCatalogoTipo = Entity.IdCatalogoTipo,
-                        IdGrupo = Entity.IdGrupo,
-                        IdImpuestoIva = Entity.IdImpuestoIva,
-                        pr_Codigo = Entity.pr_Codigo,
-                        pr_Estado = Entity.pr_Estado
-                    };
+                    info = (from Entity in db.Producto
+                            join a in db.Grupo
+                            on Entity.IdGrupo equals a.IdGrupo
+                            join b in db.Linea
+                            on a.IdLinea equals b.IdLinea
+                            select new Producto_Info
+                            {
+                                IdProducto = Entity.IdProducto,
+                                pr_Descripcion = Entity.pr_Descripcion,
+                                pr_Observacion = Entity.pr_Observacion,
+                                IdCatalogoMarca = Entity.IdCatalogoMarca,
+                                IdCatalogoModelo = Entity.IdCatalogoModelo,
+                                IdCatalogoTipo = Entity.IdCatalogoTipo,
+                                IdGrupo = Entity.IdGrupo,
+                                IdImpuestoIva = Entity.IdImpuestoIva,
+                                pr_Codigo = Entity.pr_Codigo,
+                                pr_Estado = Entity.pr_Estado,
+
+                                IdCategoria = b.IdCategoria,
+                                IdLinea = a.IdLinea
+                            }).FirstOrDefault();
                 }
                 return info;
             }

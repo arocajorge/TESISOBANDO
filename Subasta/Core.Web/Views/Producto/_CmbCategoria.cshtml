@@ -1,0 +1,23 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdCategoria";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Percentage(100);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "Producto", Action = "CmbCategoria"};
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "ca_Descripcion";
+        settings.Properties.TextFormatString = "[{0}] {1}";
+        settings.Properties.ValueField = "IdCategoria";
+        settings.Properties.ValueType = typeof(int);
+        settings.Properties.Columns.Add("IdCategoria", "ID", 10);
+        settings.Properties.Columns.Add("ca_Descripcion", "Categoría", 90);
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){ SetSession('C'); }";
+    })
+     .BindList(new Core.Web.Controllers.ProductoController().GetListCategoria, new Core.Web.Controllers.ProductoController().GetInfoCategoria)
+    .Bind((Model.GetType() == typeof(Core.Info.General.Producto_Info) || Model.GetType() == typeof(Core.Info.General.Producto_Info) || Model.GetType() == typeof(List<Core.Info.General.Producto_Info>)) || Model == 0 ? "" : Model);
+}
+@comboBox.GetHtml()

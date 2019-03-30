@@ -1,5 +1,6 @@
 ﻿using Core.Data.General;
 using Core.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,5 +77,31 @@ namespace Core.Bus.General
             }
         }
 
+        #region Bajo demanda
+        public List<Linea_Info> GetList(ListEditItemsRequestedByFilterConditionEventArgs args, int IdCategoria)
+        {
+            try
+            {
+                return odata.GetList(args, IdCategoria);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public Linea_Info GetInfo(ListEditItemRequestedByValueEventArgs args, int IdCategoria)
+        {
+            try
+            {
+                return odata.GetInfo(args, IdCategoria);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
+        #endregion
     }
 }

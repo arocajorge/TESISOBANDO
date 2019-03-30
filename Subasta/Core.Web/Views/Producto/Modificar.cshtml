@@ -1,0 +1,187 @@
+﻿@model Core.Info.General.Producto_Info
+@{
+    ViewBag.Title = "Modificar producto";
+    if (string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdUsuario))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Modificar", "Producto", FormMethod.Post, new { @id = "form", @role = "form" }))
+{
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="pr_Codigo">Código</label>
+                    @Html.TextBoxFor(q=> q.pr_Codigo, new { @class = "form-control", @id = "pr_Codigo"})
+                    @Html.ValidationMessageFor(q=> q.pr_Codigo,"",new { @class = "text-danger"})
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="pr_Codigo">Impuesto*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdImpuestoIva, setting =>
+               {
+                   setting.Name = "IdImpuestoIva";
+                   setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   setting.Properties.Columns.Add("IdImpuesto", "ID");
+                   setting.Properties.Columns.Add("im_Descripcion", "Impuesto");
+                   setting.Properties.ValueField = "IdImpuesto";
+                   setting.Properties.ValueType = typeof(int);
+
+               }).BindList(new Core.Bus.General.Impuesto_Bus().GetList(false)).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdImpuestoIva, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="pr_Codigo">Tipo*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdCatalogoTipo, setting =>
+               {
+                   setting.Name = "IdCatalogoTipo";
+                   setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   setting.Properties.Columns.Add("IdCatalogo","ID");
+                   setting.Properties.Columns.Add("ct_Descripcion", "Tipos");
+                   setting.Properties.ValueField = "IdCatalogo";
+                   setting.Properties.ValueType = typeof(int);
+
+               }).BindList(new Core.Bus.General.Catalogo_Bus().GetList(Convert.ToInt32(Core.Info.Enumeradores.IdCatalogoTipo.TIPOS),false)).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdCatalogoTipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pr_Descripcion">Descripción*</label>
+                    @Html.TextBoxFor(q => q.pr_Descripcion, new { @class = "form-control", @id = "pr_Descripcion" })
+                    @Html.ValidationMessageFor(q => q.pr_Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pr_Observacion">Observaciones</label>
+                    @Html.TextAreaFor(q => q.pr_Observacion, new { @class = "form-control", @id = "pr_Observacion", @rows = "2" })
+                    @Html.ValidationMessageFor(q => q.pr_Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdCategoria">Categoría*</label>
+                    @Html.Partial("_CmbCategoria", Model.IdCategoria)
+                    @Html.ValidationMessageFor(q => q.IdCategoria, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdLinea">Linea*</label>
+                    @Html.Partial("_CmbLinea", Model.IdLinea)
+                    @Html.ValidationMessageFor(q => q.IdLinea, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdGrupo">Grupo*</label>
+                    @Html.Partial("_CmbGrupo", Model.IdGrupo)
+                    @Html.ValidationMessageFor(q => q.IdGrupo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdGrupo">Marca</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdCatalogoMarca, setting =>
+               {
+                   setting.Name = "IdCatalogoMarca";
+                   setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   setting.Properties.Columns.Add("IdCatalogo", "ID");
+                   setting.Properties.Columns.Add("ct_Descripcion", "Tipos");
+                   setting.Properties.ValueField = "IdCatalogo";
+                   setting.Properties.ValueType = typeof(int);
+
+               }).BindList(new Core.Bus.General.Catalogo_Bus().GetList(Convert.ToInt32(Core.Info.Enumeradores.IdCatalogoTipo.MARCAS), false)).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdCatalogoMarca, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdGrupo">Modelo</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdCatalogoModelo, setting =>
+               {
+                   setting.Name = "IdCatalogoModelo";
+                   setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   setting.Properties.Columns.Add("IdCatalogo", "ID");
+                   setting.Properties.Columns.Add("ct_Descripcion", "Tipos");
+                   setting.Properties.ValueField = "IdCatalogo";
+                   setting.Properties.ValueType = typeof(int);
+
+               }).BindList(new Core.Bus.General.Catalogo_Bus().GetList(Convert.ToInt32(Core.Info.Enumeradores.IdCatalogoTipo.MODELOS), false)).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdCatalogoModelo, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Producto",null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+<script type="text/javascript">
+    function SetSession(Tipo) {
+        var datos = {
+            IdCategoria: IdCategoria.GetValue(),
+            IdLinea: IdLinea.GetValue(),
+            Tipo: Tipo
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetSession", "Producto")',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if(Tipo == "C")
+                {
+                    IdLinea.SetValue(null);
+                    IdGrupo.SetValue(null);
+                    IdLinea.PerformCallback();
+                }
+                if (Tipo == "L") {
+                    IdGrupo.SetValue(null);
+                    IdGrupo.PerformCallback();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+

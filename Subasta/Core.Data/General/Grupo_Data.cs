@@ -1,4 +1,5 @@
 ﻿using Core.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -169,6 +170,58 @@ namespace Core.Data.General
             }
         }
 
+        #region Bajo demanda
+        public List<Grupo_Info> GetList(ListEditItemsRequestedByFilterConditionEventArgs args, int IdLinea)
+        {
+            try
+            {
+                var skip = args.BeginIndex;
+                var take = args.EndIndex - args.BeginIndex + 1;
+                List<Grupo_Info> Lista = new List<Grupo_Info>();
+                Lista = get_list(skip, take, args.Filter, IdLinea);
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<Grupo_Info> get_list(int skip, int take, string filter, int IdLinea)
+        {
+            try
+            {
+                List<Grupo_Info> Lista;
 
+                using (EntitiesGeneral Context = new EntitiesGeneral())
+                {
+                    Lista = (from q in Context.Grupo
+                             where q.gr_Estado == true
+                             && q.IdLinea == IdLinea
+                             && (q.IdGrupo.ToString() + " " + q.gr_Descripcion).Contains(filter)
+                             select new Grupo_Info
+                             {
+                                 IdGrupo = q.IdGrupo,
+                                 IdLinea = q.IdLinea,
+                                 gr_Codigo = q.gr_Codigo,
+                                 gr_Descripcion = q.gr_Descripcion,
+                                 gr_Estado = q.gr_Estado
+                             })
+                             .OrderBy(p => p.IdGrupo)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public Grupo_Info GetInfo(ListEditItemRequestedByValueEventArgs args, int IdLinea)
+        {
+            return GetInfo(IdLinea, args.Value == null ? 0 : (int)args.Value);
+        }
+        #endregion
     }
 }

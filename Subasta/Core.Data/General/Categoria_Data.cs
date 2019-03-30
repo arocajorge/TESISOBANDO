@@ -1,4 +1,5 @@
 ﻿using Core.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,7 @@ namespace Core.Data.General
 
                 throw;
             }
-        }
+        }       
 
         public Categoria_Info GetInfo (int IdCategoria)
         {
@@ -163,5 +164,57 @@ namespace Core.Data.General
             }
         }
 
+        #region Bajo demanda
+        public List<Categoria_Info> GetList(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            try
+            {
+                var skip = args.BeginIndex;
+                var take = args.EndIndex - args.BeginIndex + 1;
+                List<Categoria_Info> Lista = new List<Categoria_Info>();
+                Lista = get_list(skip, take, args.Filter);
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<Categoria_Info> get_list(int skip, int take, string filter)
+        {
+            try
+            {
+                List<Categoria_Info> Lista;
+
+                using (EntitiesGeneral Context = new EntitiesGeneral())
+                {
+                    Lista = (from q in Context.Categoria
+                             where q.ca_Estado == true
+                             && (q.IdCategoria.ToString() + " " + q.ca_Descripcion).Contains(filter)
+                             select new Categoria_Info
+                             {
+                                 IdCategoria = q.IdCategoria,
+                                 ca_Descripcion = q.ca_Descripcion,
+                                 ca_Estado = q.ca_Estado,
+                                 ca_Codigo = q.ca_Codigo
+                             })
+                             .OrderBy(p => p.IdCategoria)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public Categoria_Info GetInfo(ListEditItemRequestedByValueEventArgs args)
+        {
+            return GetInfo(args.Value == null ? 0 : (int)args.Value);
+        }
+        #endregion
     }
 }

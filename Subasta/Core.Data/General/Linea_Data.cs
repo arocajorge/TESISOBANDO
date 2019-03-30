@@ -1,4 +1,5 @@
 ﻿using Core.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -164,5 +165,58 @@ namespace Core.Data.General
             }
         }
 
+        #region Bajo demanda
+        public List<Linea_Info> GetList(ListEditItemsRequestedByFilterConditionEventArgs args, int IdCategoria)
+        {
+            try
+            {
+                var skip = args.BeginIndex;
+                var take = args.EndIndex - args.BeginIndex + 1;
+                List<Linea_Info> Lista = new List<Linea_Info>();
+                Lista = get_list(skip, take, args.Filter, IdCategoria);
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<Linea_Info> get_list(int skip, int take, string filter, int IdCategoria)
+        {
+            try
+            {
+                List<Linea_Info> Lista;
+
+                using (EntitiesGeneral Context = new EntitiesGeneral())
+                {
+                    Lista = (from q in Context.Linea
+                             where q.li_Estado == true
+                             && q.IdCategoria == IdCategoria
+                             && (q.IdLinea.ToString() + " " + q.li_Descripcion).Contains(filter)
+                             select new Linea_Info
+                             {
+                                 IdCategoria = q.IdCategoria,
+                                 li_Descripcion = q.li_Descripcion,
+                                 li_Codigo = q.li_Codigo,
+                                 IdLinea = q.IdLinea,
+                                 li_Estado = q.li_Estado
+                             })
+                             .OrderBy(p => p.IdLinea)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public Linea_Info GetInfo(ListEditItemRequestedByValueEventArgs args, int IdCategoria)
+        {
+            return GetInfo(IdCategoria, args.Value == null ? 0 : (int)args.Value);
+        }
+        #endregion
     }
 }

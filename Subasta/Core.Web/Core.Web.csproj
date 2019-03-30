@@ -194,6 +194,7 @@
     <Compile Include="Controllers\CatalogoTipoController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
+    <Compile Include="Controllers\ImpuestoController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\LineaController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
@@ -7122,6 +7123,17 @@
     <Content Include="Views\Proveedor\Modificar.cshtml" />
     <Content Include="Views\Proveedor\Anular.cshtml" />
     <Content Include="Views\Categoria\_GridViewPartialCategorias.cshtml" />
+    <Content Include="Views\Producto\Nuevo.cshtml" />
+    <Content Include="Views\Impuesto\_GridViewPartial_Impuesto.cshtml" />
+    <Content Include="Views\Impuesto\Anular.cshtml" />
+    <Content Include="Views\Impuesto\Index.cshtml" />
+    <Content Include="Views\Impuesto\Modificar.cshtml" />
+    <Content Include="Views\Impuesto\Nuevo.cshtml" />
+    <Content Include="Views\Producto\_CmbCategoria.cshtml" />
+    <Content Include="Views\Producto\_CmbLinea.cshtml" />
+    <Content Include="Views\Producto\_CmbGrupo.cshtml" />
+    <Content Include="Views\Producto\Modificar.cshtml" />
+    <Content Include="Views\Producto\Anular.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

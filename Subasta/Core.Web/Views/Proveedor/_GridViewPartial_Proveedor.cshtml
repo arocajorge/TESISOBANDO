@@ -52,7 +52,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
+            if (Convert.ToBoolean(e.GetValue("pv_Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -62,7 +62,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "pv_Estado")) == true)
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdProveedor = DataBinder.Eval(tc.DataItem, "IdProveedor") }) + "&nbsp;" +
@@ -83,14 +83,15 @@
         });
 
 
-        settings.Columns.Add("IdProveedor", "ID").Width = Unit.Percentage(20);
-        settings.Columns.Add("ca_Codigo", "Código").Width = Unit.Percentage(20);
-        settings.Columns.Add("ca_Descripcion", "Descripción").Width = Unit.Percentage(60);
+        settings.Columns.Add("IdProveedor", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("pv_CedulaRuc", "Ruc").Width = Unit.Percentage(10);
+        settings.Columns.Add("pv_Descripcion", "Proveedor").Width = Unit.Percentage(40);
+        settings.Columns.Add("pv_Correo", "Correo").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "ca_Estado";
+            column.FieldName = "pv_Estado";
             column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {
 

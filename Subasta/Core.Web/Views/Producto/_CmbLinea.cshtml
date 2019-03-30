@@ -1,0 +1,24 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdLinea";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Percentage(100);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "Producto", Action = "CmbLinea"};
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "li_Descripcion";
+        settings.Properties.TextFormatString = "[{0}] {1}";
+        settings.Properties.ValueField = "IdLinea";
+        settings.Properties.ValueType = typeof(int);
+        settings.Properties.Columns.Add("IdLinea", "ID", 10);
+        settings.Properties.Columns.Add("li_Descripcion", "Linea", 90);
+        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdCategoria'] =  IdCategoria.GetValue(); }";
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){ SetSession('L'); }";
+    })
+     .BindList(new Core.Web.Controllers.ProductoController().GetListLinea, new Core.Web.Controllers.ProductoController().GetInfoLinea)
+    .Bind((Model.GetType() == typeof(Core.Info.General.Producto_Info) || Model.GetType() == typeof(Core.Info.General.Producto_Info) || Model.GetType() == typeof(List<Core.Info.General.Producto_Info>)) || Model == 0 ? "" : Model);
+}
+@comboBox.GetHtml()

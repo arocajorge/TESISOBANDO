@@ -23,7 +23,14 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="info_persona.pv_TipoDoc">Tipo documento*</label>
-                    @Html.DropDownListFor(q => q.pv_TipoDoc, new SelectList(ViewBag.lst_tipo_doc, "IdCatalogo", "ct_Descripcion"), new { @class = "form-control", @id = "pv_TipoDoc" })
+                    @Html.DevExpress().ComboBoxFor(q => q.pv_TipoDoc, setting =>
+               {
+                   setting.Name = "pv_TipoDoc";
+                   setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   setting.Properties.Items.Add("RUC", "RUC");
+                   setting.Properties.Items.Add("CEDULA", "CED");
+                   setting.Properties.Items.Add("PASAPORTE", "PAS");
+               }).GetHtml()
                     @Html.ValidationMessageFor(q => q.pv_TipoDoc, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -32,7 +39,7 @@
                     <label for="pv_CedulaRuc">Número documento*</label>
                     @Html.TextBoxFor(q => q.pv_CedulaRuc, new { @class = "form-control", @id = "pv_CedulaRuc" })
                     @Html.ValidationMessageFor(q => q.pv_CedulaRuc, "", new { @class = "text-danger" })
-                    <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
+                    <label id="error_documento" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                 </div>
             </div>
         </div>
@@ -90,7 +97,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Categoria",null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","Proveedor",null)">Cancelar</a>
     </div>
 
     @section Scripts {

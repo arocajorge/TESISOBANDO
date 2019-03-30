@@ -1,5 +1,6 @@
 ﻿using Core.Data.General;
 using Core.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,30 @@ namespace Core.Bus.General
             }
         }
 
+        public List<Categoria_Info> GetList(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            try
+            {
+                return odata.GetList(args);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public Categoria_Info GetInfo(ListEditItemRequestedByValueEventArgs args)
+        {
+            try
+            {
+                return odata.GetInfo(args);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public Categoria_Info GetInfo(int IdCategoria)
         {
             try

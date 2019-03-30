@@ -2,10 +2,10 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_Producto";
-        settings.CallbackRouteValues = new { Controller = "Categoria", Action = "GridViewPartial_producto" };
+        settings.Name = "GridView_Impuesto";
+        settings.CallbackRouteValues = new { Controller = "Categoria", Action = "GridViewPartial_Impuesto" };
 
-        settings.KeyFieldName = "IdProducto";
+        settings.KeyFieldName = "IdImpuesto";
         settings.Width = Unit.Percentage(100);
 
         //Configuración para que la grilla no muestre texto completo
@@ -52,7 +52,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToBoolean(e.GetValue("pr_Estado")) == false)
+            if (Convert.ToBoolean(e.GetValue("im_Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -62,11 +62,11 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "pr_Estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "im_Estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdProducto = DataBinder.Eval(tc.DataItem, "IdProducto") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdProducto = DataBinder.Eval(tc.DataItem, "IdProducto") },
+                Html.ActionLink("Modificar", "Modificar", new { IdImpuesto = DataBinder.Eval(tc.DataItem, "IdImpuesto") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdImpuesto = DataBinder.Eval(tc.DataItem, "IdImpuesto") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -83,12 +83,12 @@
         });
 
 
-        settings.Columns.Add("IdProducto", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("pr_Codigo", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("pr_Descripcion", "Descripción").Width = Unit.Percentage(60);
+        settings.Columns.Add("IdImpuesto", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("im_Descripcion", "Impuesto").Width = Unit.Percentage(60);
+        settings.Columns.Add("im_Porcentaje", "Porcentaje").Width = Unit.Percentage(10);        
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pr_Estado";
+            column.FieldName = "im_Estado";
             column.Caption = "Estado";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>

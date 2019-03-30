@@ -8,6 +8,9 @@ namespace Core.Erp.Web.Helps
         string NombreUsuario { get; set; }
         string IdTransaccionSession { get; set; }
         string IdTransaccionSessionActual { get; set; }
+
+        string IdCategoria { get; set; }
+        string IdLinea { get; set; }
     }
 
     public static class SessionFixed
@@ -37,6 +40,17 @@ namespace Core.Erp.Web.Helps
             get { return _sessionValueProvider.IdTransaccionSessionActual; }
             set { _sessionValueProvider.IdTransaccionSessionActual = value; }
         }
+
+        public static string IdCategoria
+        {
+            get { return _sessionValueProvider.IdCategoria; }
+            set { _sessionValueProvider.IdCategoria = value; }
+        }
+        public static string IdLinea
+        {
+            get { return _sessionValueProvider.IdLinea; }
+            set { _sessionValueProvider.IdLinea = value; }
+        }
     }
 
     public class WebSessionValueProvider : ISessionValueProvider
@@ -45,6 +59,8 @@ namespace Core.Erp.Web.Helps
         private const string _NombreUsuario = "Su_NombreUsuario";
         private const string _IdTransaccionSession = "Su_IdTransaccionSesssion";
         private const string _IdTransaccionSessionActual = "Su_IdTransaccionSessionActual";
+        private const string _IdCategoria= "Su_IdCategoria";
+        private const string _IdLinea = "Su_IdLinea";
 
         public string IdUsuario
         {
@@ -65,6 +81,16 @@ namespace Core.Erp.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdTransaccionSessionActual]; }
             set { HttpContext.Current.Session[_IdTransaccionSessionActual] = value; }
+        }
+        public string IdCategoria
+        {
+            get { return (string)HttpContext.Current.Session[_IdCategoria]; }
+            set { HttpContext.Current.Session[_IdCategoria] = value; }
+        }
+        public string IdLinea
+        {
+            get { return (string)HttpContext.Current.Session[_IdLinea]; }
+            set { HttpContext.Current.Session[_IdLinea] = value; }
         }
     }
 }
