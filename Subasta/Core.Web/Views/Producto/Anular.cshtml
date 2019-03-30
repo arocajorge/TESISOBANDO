@@ -11,7 +11,7 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "Producto", FormMethod.Post, new { @id = "form", @role = "form" }))
 {
-
+    @Html.HiddenFor(q=>q.IdProducto)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-4">
