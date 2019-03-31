@@ -1,0 +1,94 @@
+﻿@model Core.Info.General.Subasta_Info
+@{
+    ViewBag.Title = "Modificar subasta";
+    if (string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdUsuario))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Modificar","Subasta",FormMethod.Post,new { @role = "form", @class = "form"}))
+{
+    @Html.HiddenFor(q=> q.IdSubasta)
+    @Html.HiddenFor(q=> q.IdUsuario)
+    <div class="row">
+        <div class="col-md-12">
+             <div class="col-md-10">
+                 <div class="form-group">
+                     <label for="su_Descripcion">Descripción*</label>
+                     @Html.TextBoxFor(q=> q.su_Descripcion, new { @class = "form-control"})
+                     @Html.ValidationMessageFor(q=> q.su_Descripcion,"",new { @class = "text-danger"})
+                 </div>
+             </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="">Fecha fin subasta</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.su_FechaFin, settings =>
+                        {
+                            settings.Name = "su_FechaFin";
+                            settings.Properties.UseMaskBehavior = true;
+                            settings.Properties.EditFormat = EditFormat.Date;
+                            settings.Properties.EditFormatString = "dd/MM/yyyy";
+                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.su_FechaFin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label for="IdProducto">Producto*</label>
+                    @Html.Partial("_CmbProducto", Model.IdProducto)
+                    @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="su_Cantidad">Cantidad*</label>
+                    @Html.TextBoxFor(q => q.su_Cantidad, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.su_Cantidad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pr_Observacion">Observaciones</label>
+                    @Html.TextAreaFor(q => q.su_Observacion, new { @class = "form-control", @id = "pr_Observacion", @rows = "2" })
+                    @Html.ValidationMessageFor(q => q.su_Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_subasta_det")
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Subasta",null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+}

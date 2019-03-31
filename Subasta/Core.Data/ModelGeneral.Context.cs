@@ -35,7 +35,7 @@ namespace Core.Data
         public virtual DbSet<Subasta> Subasta { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<UsuarioPerfil> UsuarioPerfil { get; set; }
-        public virtual DbSet<Oferta> Oferta { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
+        public virtual DbSet<Oferta> Oferta { get; set; }
     }
 }

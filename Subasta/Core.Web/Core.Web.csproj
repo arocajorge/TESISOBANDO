@@ -7133,6 +7133,8 @@
     <Content Include="Views\Subasta\_GridViewPartial_subasta.cshtml" />
     <Content Include="Views\Subasta\Nuevo.cshtml" />
     <Content Include="Views\Subasta\_CmbProducto.cshtml" />
+    <Content Include="Views\Subasta\_GridViewPartial_subasta_det.cshtml" />
+    <Content Include="Views\Subasta\Modificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

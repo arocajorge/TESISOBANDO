@@ -31,8 +31,8 @@ namespace Core.Data
         public string IdUsuario { get; set; }
     
         public virtual Usuario Usuario { get; set; }
+        public virtual Producto Producto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Oferta> Oferta { get; set; }
-        public virtual Producto Producto { get; set; }
     }
 }

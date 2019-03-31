@@ -25,7 +25,6 @@ namespace Core.Data.General
                             IdSubasta = q.IdSubasta,
                             of_Observacion = q.of_Observacion,
                             of_Plazo = q.of_Plazo,
-                            Secuencia = q.Secuencia,
                             of_Total = q.of_Total
                         }).ToList();
                     }
@@ -38,7 +37,6 @@ namespace Core.Data.General
                             IdSubasta = q.IdSubasta,
                             of_Observacion = q.of_Observacion,
                             of_Plazo = q.of_Plazo,
-                            Secuencia = q.Secuencia,
                             of_Total = q.of_Total
                         }).ToList();
                     }
@@ -47,7 +45,36 @@ namespace Core.Data.General
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
 
+        public List<Oferta_Info> GetList(decimal IdSubasta)
+        {
+            try
+            {
+                List<Oferta_Info> Lista;
+                using (EntitiesGeneral db = new EntitiesGeneral())
+                {
+                    Lista = (from q in db.Oferta
+                             join p in db.Proveedor
+                             on q.IdProveedor equals p.IdProveedor
+                             where q.of_Estado == true && q.IdSubasta == IdSubasta
+                             select new Oferta_Info
+                             {
+                                 IdOferta = q.IdOferta,
+                                 IdProveedor = q.IdProveedor,
+                                 IdSubasta = q.IdSubasta,
+                                 of_Observacion = q.of_Observacion,
+                                 of_Plazo = q.of_Plazo,
+                                 of_Total = q.of_Total,
+                                 pv_Descripcion = p.pv_Descripcion
+                             }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -73,7 +100,6 @@ namespace Core.Data.General
                         of_FechaFin = Entity.of_FechaFin,
                         of_Observacion = Entity.of_Observacion,
                         of_Plazo = Entity.of_Plazo,
-                        Secuencia = Entity.Secuencia,
                         of_Total = Entity.of_Total
                     };
                 }
@@ -124,7 +150,6 @@ namespace Core.Data.General
                         of_FechaFin = info.of_FechaFin,
                         of_Observacion = info.of_Observacion,
                         of_Plazo = info.of_Plazo,
-                        Secuencia = info.Secuencia,
                         of_Total = info.of_Total
                     });
                     db.SaveChanges();
@@ -145,15 +170,18 @@ namespace Core.Data.General
                 using (EntitiesGeneral db = new EntitiesGeneral())
                 {
                     Oferta Entity = db.Oferta.Where(q => q.IdOferta == info.IdOferta).FirstOrDefault();
-                    if (Entity == null) return false;
-                    Entity.IdProveedor = info.IdProveedor;
-                    Entity.IdSubasta = info.IdSubasta;
-                    Entity.of_EstadoGanador = info.of_EstadoGanador;
+                    if (Entity == null)
+                    {
+                        Entity = db.Oferta.Where(q => q.IdSubasta == info.IdSubasta && q.IdProveedor == info.IdProveedor).FirstOrDefault();
+                        if (Entity == null)
+                        {
+                            return GuardarDB(info);
+                        }
+                    }
                     Entity.of_Fecha = info.of_Fecha;
                     Entity.of_FechaFin = info.of_FechaFin;
                     Entity.of_Observacion = info.of_Observacion;
                     Entity.of_Plazo = info.of_Plazo;
-                    Entity.Secuencia = info.Secuencia;
                     Entity.of_Total = info.of_Total;
                     db.SaveChanges();
                 }

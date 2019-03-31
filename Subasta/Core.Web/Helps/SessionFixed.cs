@@ -11,6 +11,8 @@ namespace Core.Erp.Web.Helps
 
         string IdCategoria { get; set; }
         string IdLinea { get; set; }
+        string IdSubasta { get; set; }
+        string IdProveedor { get; set; }
     }
 
     public static class SessionFixed
@@ -51,6 +53,16 @@ namespace Core.Erp.Web.Helps
             get { return _sessionValueProvider.IdLinea; }
             set { _sessionValueProvider.IdLinea = value; }
         }
+        public static string IdSubasta
+        {
+            get { return _sessionValueProvider.IdSubasta; }
+            set { _sessionValueProvider.IdSubasta = value; }
+        }
+        public static string IdProveedor
+        {
+            get { return _sessionValueProvider.IdProveedor; }
+            set { _sessionValueProvider.IdProveedor = value; }
+        }
     }
 
     public class WebSessionValueProvider : ISessionValueProvider
@@ -61,6 +73,8 @@ namespace Core.Erp.Web.Helps
         private const string _IdTransaccionSessionActual = "Su_IdTransaccionSessionActual";
         private const string _IdCategoria= "Su_IdCategoria";
         private const string _IdLinea = "Su_IdLinea";
+        private const string _IdSubasta = "Su_IdSubasta";
+        private const string _IdProveedor = "Su_IdProveedor";
 
         public string IdUsuario
         {
@@ -91,6 +105,16 @@ namespace Core.Erp.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdLinea]; }
             set { HttpContext.Current.Session[_IdLinea] = value; }
+        }
+        public string IdSubasta
+        {
+            get { return (string)HttpContext.Current.Session[_IdSubasta]; }
+            set { HttpContext.Current.Session[_IdSubasta] = value; }
+        }
+        public string IdProveedor
+        {
+            get { return (string)HttpContext.Current.Session[_IdProveedor]; }
+            set { HttpContext.Current.Session[_IdProveedor] = value; }
         }
     }
 }

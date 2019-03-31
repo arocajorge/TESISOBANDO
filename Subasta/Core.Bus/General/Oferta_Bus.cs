@@ -24,6 +24,19 @@ namespace Core.Bus.General
             }
         }
 
+        public List<Oferta_Info> GetList(decimal IdSubasta)
+        {
+            try
+            {
+                return odata.GetList(IdSubasta);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public Oferta_Info GetInfo(decimal IdOferta)
         {
             try

@@ -68,7 +68,6 @@
           <Property Name="IdOferta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdSubasta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Secuencia" Type="int" Nullable="false" />
           <Property Name="of_Observacion" Type="varchar(max)" />
           <Property Name="of_Estado" Type="bit" Nullable="false" />
           <Property Name="of_Fecha" Type="datetime" Nullable="false" />
@@ -445,8 +444,8 @@
           <Property Name="su_Estado" Type="Boolean" Nullable="false" />
           <Property Name="IdUsuario" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Subasta_Usuario" FromRole="Subasta" ToRole="Usuario" />
-          <NavigationProperty Name="Oferta" Relationship="ModelGeneral.FK_Oferta_Subasta" FromRole="Subasta" ToRole="Oferta" />
           <NavigationProperty Name="Producto" Relationship="ModelGeneral.FK_Subasta_Producto" FromRole="Subasta" ToRole="Producto" />
+          <NavigationProperty Name="Oferta" Relationship="ModelGeneral.FK_Oferta_Subasta" FromRole="Subasta" ToRole="Oferta" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -578,7 +577,6 @@
             <End Role="UsuarioPerfil" EntitySet="UsuarioPerfil" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-          <EntitySet Name="Oferta" EntityType="ModelGeneral.Oferta" />
           <EntitySet Name="Producto" EntityType="ModelGeneral.Producto" />
           <AssociationSet Name="FK_Producto_Catalogo" Association="ModelGeneral.FK_Producto_Catalogo">
             <End Role="Catalogo" EntitySet="Catalogo" />
@@ -596,32 +594,16 @@
             <End Role="Grupo" EntitySet="Grupo" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
-          <AssociationSet Name="FK_Oferta_Subasta" Association="ModelGeneral.FK_Oferta_Subasta">
-            <End Role="Subasta" EntitySet="Subasta" />
-            <End Role="Oferta" EntitySet="Oferta" />
-          </AssociationSet>
           <AssociationSet Name="FK_Subasta_Producto" Association="ModelGeneral.FK_Subasta_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Subasta" EntitySet="Subasta" />
           </AssociationSet>
+          <EntitySet Name="Oferta" EntityType="ModelGeneral.Oferta" />
+          <AssociationSet Name="FK_Oferta_Subasta" Association="ModelGeneral.FK_Oferta_Subasta">
+            <End Role="Subasta" EntitySet="Subasta" />
+            <End Role="Oferta" EntitySet="Oferta" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Oferta">
-          <Key>
-            <PropertyRef Name="IdOferta" />
-          </Key>
-          <Property Name="IdOferta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdSubasta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="of_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="of_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="of_Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="of_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="of_Plazo" Type="Int32" Nullable="false" />
-          <Property Name="of_EstadoGanador" Type="Boolean" Nullable="false" />
-          <Property Name="of_Total" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Subasta" Relationship="ModelGeneral.FK_Oferta_Subasta" FromRole="Oferta" ToRole="Subasta" />
-        </EntityType>
         <EntityType Name="Producto">
           <Key>
             <PropertyRef Name="IdProducto" />
@@ -689,18 +671,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Oferta_Subasta">
-          <End Type="ModelGeneral.Subasta" Role="Subasta" Multiplicity="1" />
-          <End Type="ModelGeneral.Oferta" Role="Oferta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subasta">
-              <PropertyRef Name="IdSubasta" />
-            </Principal>
-            <Dependent Role="Oferta">
-              <PropertyRef Name="IdSubasta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Subasta_Producto">
           <End Type="ModelGeneral.Producto" Role="Producto" Multiplicity="1" />
           <End Type="ModelGeneral.Subasta" Role="Subasta" Multiplicity="*" />
@@ -710,6 +680,34 @@
             </Principal>
             <Dependent Role="Subasta">
               <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Oferta">
+          <Key>
+            <PropertyRef Name="IdOferta" />
+          </Key>
+          <Property Name="IdOferta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSubasta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="of_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="of_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="of_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="of_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="of_Plazo" Type="Int32" Nullable="false" />
+          <Property Name="of_EstadoGanador" Type="Boolean" Nullable="false" />
+          <Property Name="of_Total" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Subasta" Relationship="ModelGeneral.FK_Oferta_Subasta" FromRole="Oferta" ToRole="Subasta" />
+        </EntityType>
+        <Association Name="FK_Oferta_Subasta">
+          <End Type="ModelGeneral.Subasta" Role="Subasta" Multiplicity="1" />
+          <End Type="ModelGeneral.Oferta" Role="Oferta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subasta">
+              <PropertyRef Name="IdSubasta" />
+            </Principal>
+            <Dependent Role="Oferta">
+              <PropertyRef Name="IdSubasta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -833,23 +831,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Oferta">
-            <EntityTypeMapping TypeName="ModelGeneral.Oferta">
-              <MappingFragment StoreEntitySet="Oferta">
-                <ScalarProperty Name="of_Total" ColumnName="of_Total" />
-                <ScalarProperty Name="of_EstadoGanador" ColumnName="of_EstadoGanador" />
-                <ScalarProperty Name="of_Plazo" ColumnName="of_Plazo" />
-                <ScalarProperty Name="of_FechaFin" ColumnName="of_FechaFin" />
-                <ScalarProperty Name="of_Fecha" ColumnName="of_Fecha" />
-                <ScalarProperty Name="of_Estado" ColumnName="of_Estado" />
-                <ScalarProperty Name="of_Observacion" ColumnName="of_Observacion" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-                <ScalarProperty Name="IdSubasta" ColumnName="IdSubasta" />
-                <ScalarProperty Name="IdOferta" ColumnName="IdOferta" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Producto">
             <EntityTypeMapping TypeName="ModelGeneral.Producto">
               <MappingFragment StoreEntitySet="Producto">
@@ -862,6 +843,22 @@
                 <ScalarProperty Name="pr_Descripcion" ColumnName="pr_Descripcion" />
                 <ScalarProperty Name="pr_Codigo" ColumnName="pr_Codigo" />
                 <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Oferta">
+            <EntityTypeMapping TypeName="ModelGeneral.Oferta">
+              <MappingFragment StoreEntitySet="Oferta">
+                <ScalarProperty Name="of_Total" ColumnName="of_Total" />
+                <ScalarProperty Name="of_EstadoGanador" ColumnName="of_EstadoGanador" />
+                <ScalarProperty Name="of_Plazo" ColumnName="of_Plazo" />
+                <ScalarProperty Name="of_FechaFin" ColumnName="of_FechaFin" />
+                <ScalarProperty Name="of_Fecha" ColumnName="of_Fecha" />
+                <ScalarProperty Name="of_Estado" ColumnName="of_Estado" />
+                <ScalarProperty Name="of_Observacion" ColumnName="of_Observacion" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdSubasta" ColumnName="IdSubasta" />
+                <ScalarProperty Name="IdOferta" ColumnName="IdOferta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

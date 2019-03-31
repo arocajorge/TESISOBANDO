@@ -21,14 +21,14 @@
         <AssociationConnector Association="ModelGeneral.FK_Grupo_Linea" ManuallyRouted="false" />
         <AssociationConnector Association="ModelGeneral.FK_Subasta_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="ModelGeneral.FK_Usuario_UsuarioPerfil" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ModelGeneral.Oferta" Width="1.5" PointX="10.5" PointY="4.875" />
         <EntityTypeShape EntityType="ModelGeneral.Producto" Width="1.5" PointX="6" PointY="4.75" />
         <AssociationConnector Association="ModelGeneral.FK_Producto_Catalogo" />
         <AssociationConnector Association="ModelGeneral.FK_Producto_Catalogo1" />
         <AssociationConnector Association="ModelGeneral.FK_Producto_Catalogo2" />
         <AssociationConnector Association="ModelGeneral.FK_Producto_Grupo" />
-        <AssociationConnector Association="ModelGeneral.FK_Oferta_Subasta" />
         <AssociationConnector Association="ModelGeneral.FK_Subasta_Producto" />
+        <EntityTypeShape EntityType="ModelGeneral.Oferta" Width="1.5" PointX="10.5" PointY="5" />
+        <AssociationConnector Association="ModelGeneral.FK_Oferta_Subasta" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

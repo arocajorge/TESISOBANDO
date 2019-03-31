@@ -17,7 +17,6 @@ namespace Core.Data
         public decimal IdOferta { get; set; }
         public decimal IdSubasta { get; set; }
         public decimal IdProveedor { get; set; }
-        public int Secuencia { get; set; }
         public string of_Observacion { get; set; }
         public bool of_Estado { get; set; }
         public System.DateTime of_Fecha { get; set; }

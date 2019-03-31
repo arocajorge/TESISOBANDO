@@ -14,7 +14,6 @@ namespace Core.Info.General
         public decimal IdSubasta { get; set; }
         [Required(ErrorMessage = "El campo proveedor es obligatorio")]
         public decimal IdProveedor { get; set; }
-        public int Secuencia { get; set; }
         public string of_Observacion { get; set; }
         public bool of_Estado { get; set; }
         [Required(ErrorMessage = "El campo fecha es obligatorio")]
@@ -25,5 +24,6 @@ namespace Core.Info.General
         public int of_Plazo { get; set; }
         public bool of_EstadoGanador { get; set; }
         public double of_Total { get; set; }
+        public string pv_Descripcion { get; set; }
     }
 }
