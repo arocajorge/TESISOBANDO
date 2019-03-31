@@ -25,7 +25,8 @@ namespace Core.Data.General
                             IdSubasta = q.IdSubasta,
                             of_Observacion = q.of_Observacion,
                             of_Plazo = q.of_Plazo,
-                            Secuencia = q.Secuencia
+                            Secuencia = q.Secuencia,
+                            of_Total = q.of_Total
                         }).ToList();
                     }
                     else
@@ -37,8 +38,8 @@ namespace Core.Data.General
                             IdSubasta = q.IdSubasta,
                             of_Observacion = q.of_Observacion,
                             of_Plazo = q.of_Plazo,
-                            Secuencia = q.Secuencia
-
+                            Secuencia = q.Secuencia,
+                            of_Total = q.of_Total
                         }).ToList();
                     }
                 }
@@ -72,7 +73,8 @@ namespace Core.Data.General
                         of_FechaFin = Entity.of_FechaFin,
                         of_Observacion = Entity.of_Observacion,
                         of_Plazo = Entity.of_Plazo,
-                        Secuencia = Entity.Secuencia
+                        Secuencia = Entity.Secuencia,
+                        of_Total = Entity.of_Total
                     };
                 }
                 return info;
@@ -122,7 +124,8 @@ namespace Core.Data.General
                         of_FechaFin = info.of_FechaFin,
                         of_Observacion = info.of_Observacion,
                         of_Plazo = info.of_Plazo,
-                        Secuencia = info.Secuencia
+                        Secuencia = info.Secuencia,
+                        of_Total = info.of_Total
                     });
                     db.SaveChanges();
                 }
@@ -151,6 +154,7 @@ namespace Core.Data.General
                     Entity.of_Observacion = info.of_Observacion;
                     Entity.of_Plazo = info.of_Plazo;
                     Entity.Secuencia = info.Secuencia;
+                    Entity.of_Total = info.of_Total;
                     db.SaveChanges();
                 }
                 return true;

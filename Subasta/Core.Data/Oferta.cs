@@ -14,12 +14,6 @@ namespace Core.Data
     
     public partial class Oferta
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Oferta()
-        {
-            this.OfertaDet = new HashSet<OfertaDet>();
-        }
-    
         public decimal IdOferta { get; set; }
         public decimal IdSubasta { get; set; }
         public decimal IdProveedor { get; set; }
@@ -30,10 +24,8 @@ namespace Core.Data
         public System.DateTime of_FechaFin { get; set; }
         public int of_Plazo { get; set; }
         public bool of_EstadoGanador { get; set; }
+        public double of_Total { get; set; }
     
-        public virtual ProveedorSucursal ProveedorSucursal { get; set; }
         public virtual Subasta Subasta { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OfertaDet> OfertaDet { get; set; }
     }
 }

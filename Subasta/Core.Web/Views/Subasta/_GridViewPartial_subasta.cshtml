@@ -1,11 +1,12 @@
+
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_Impuesto";
-        settings.CallbackRouteValues = new { Controller = "Categoria", Action = "GridViewPartial_Impuesto" };
+        settings.Name = "GridView_Subasta";
+        settings.CallbackRouteValues = new { Controller = "Subasta", Action = "GridViewPartial_subasta" };
 
-        settings.KeyFieldName = "IdImpuesto";
+        settings.KeyFieldName = "IdSubasta";
         settings.Width = Unit.Percentage(100);
 
         //Configuración para que la grilla no muestre texto completo
@@ -52,7 +53,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToBoolean(e.GetValue("im_Estado")) == false)
+            if (Convert.ToBoolean(e.GetValue("su_Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -62,11 +63,11 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "im_Estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "su_Estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdImpuesto = DataBinder.Eval(tc.DataItem, "IdImpuesto") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdImpuesto = DataBinder.Eval(tc.DataItem, "IdImpuesto") },
+                Html.ActionLink("Modificar", "Modificar", new { IdSubasta = DataBinder.Eval(tc.DataItem, "IdSubasta") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdSubasta = DataBinder.Eval(tc.DataItem, "IdSubasta") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -83,12 +84,12 @@
         });
 
 
-        settings.Columns.Add("IdImpuesto", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("im_Descripcion", "Impuesto").Width = Unit.Percentage(60);
-        settings.Columns.Add("im_Porcentaje", "Porcentaje").Width = Unit.Percentage(10);        
+        settings.Columns.Add("IdSubasta", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("pr_Descripcion", "Producto").Width = Unit.Percentage(30);
+        settings.Columns.Add("su_Descripcion", "Descripción").Width = Unit.Percentage(40);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "im_Estado";
+            column.FieldName = "su_Estado";
             column.Caption = "Estado";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>

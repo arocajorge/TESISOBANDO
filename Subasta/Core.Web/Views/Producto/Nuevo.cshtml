@@ -21,23 +21,7 @@
                     @Html.ValidationMessageFor(q=> q.pr_Codigo,"",new { @class = "text-danger"})
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="pr_Codigo">Impuesto*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdImpuestoIva, setting =>
-               {
-                   setting.Name = "IdImpuestoIva";
-                   setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   setting.Properties.Columns.Add("IdImpuesto", "ID");
-                   setting.Properties.Columns.Add("im_Descripcion", "Impuesto");
-                   setting.Properties.ValueField = "IdImpuesto";
-                   setting.Properties.ValueType = typeof(int);
-
-               }).BindList(new Core.Bus.General.Impuesto_Bus().GetList(false)).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdImpuestoIva, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-offset-4 col-md-4">
                 <div class="form-group">
                     <label for="pr_Codigo">Tipo*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdCatalogoTipo, setting =>

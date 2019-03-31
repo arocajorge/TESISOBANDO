@@ -28,7 +28,6 @@ namespace Core.Info.General
         public int IdCatalogoMarca { get; set; }
         [Required(ErrorMessage = "El campo modelo es obligatorio")]
         public int IdCatalogoModelo { get; set; }
-        [Required(ErrorMessage = "El campo impuesto es obligatorio")]
-        public int IdImpuestoIva { get; set; }
+
     }
 }

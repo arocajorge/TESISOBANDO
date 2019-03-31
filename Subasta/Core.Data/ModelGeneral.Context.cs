@@ -30,15 +30,12 @@ namespace Core.Data
         public virtual DbSet<CatalogoTipo> CatalogoTipo { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Grupo> Grupo { get; set; }
-        public virtual DbSet<Impuesto> Impuesto { get; set; }
         public virtual DbSet<Linea> Linea { get; set; }
-        public virtual DbSet<Oferta> Oferta { get; set; }
-        public virtual DbSet<OfertaDet> OfertaDet { get; set; }
-        public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
-        public virtual DbSet<ProveedorSucursal> ProveedorSucursal { get; set; }
         public virtual DbSet<Subasta> Subasta { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<UsuarioPerfil> UsuarioPerfil { get; set; }
+        public virtual DbSet<Oferta> Oferta { get; set; }
+        public virtual DbSet<Producto> Producto { get; set; }
     }
 }

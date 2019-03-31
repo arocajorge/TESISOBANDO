@@ -24,5 +24,6 @@ namespace Core.Info.General
         [Required(ErrorMessage = "El campo plazo es obligatorio")]
         public int of_Plazo { get; set; }
         public bool of_EstadoGanador { get; set; }
+        public double of_Total { get; set; }
     }
 }

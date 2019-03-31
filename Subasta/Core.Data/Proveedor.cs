@@ -14,12 +14,6 @@ namespace Core.Data
     
     public partial class Proveedor
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Proveedor()
-        {
-            this.ProveedorSucursal = new HashSet<ProveedorSucursal>();
-        }
-    
         public decimal IdProveedor { get; set; }
         public string pv_Codigo { get; set; }
         public string pv_TipoDoc { get; set; }
@@ -30,8 +24,5 @@ namespace Core.Data
         public string pv_Direccion { get; set; }
         public int pv_Plazo { get; set; }
         public bool pv_Estado { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProveedorSucursal> ProveedorSucursal { get; set; }
     }
 }

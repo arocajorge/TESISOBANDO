@@ -1,5 +1,6 @@
 ﻿using Core.Data.General;
 using Core.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,5 +77,21 @@ namespace Core.Bus.General
             }
         }
 
+        public List<Producto_Info> GetList(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            try
+            {
+                return odata.GetList(args);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public Producto_Info GetInfo(ListEditItemRequestedByValueEventArgs args)
+        {
+            return odata.GetInfo(args);
+        }
     }
 }

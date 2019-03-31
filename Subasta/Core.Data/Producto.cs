@@ -29,13 +29,11 @@ namespace Core.Data
         public int IdCatalogoTipo { get; set; }
         public int IdCatalogoMarca { get; set; }
         public int IdCatalogoModelo { get; set; }
-        public int IdImpuestoIva { get; set; }
     
         public virtual Catalogo Catalogo { get; set; }
         public virtual Catalogo Catalogo1 { get; set; }
         public virtual Catalogo Catalogo2 { get; set; }
         public virtual Grupo Grupo { get; set; }
-        public virtual Impuesto Impuesto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Subasta> Subasta { get; set; }
     }

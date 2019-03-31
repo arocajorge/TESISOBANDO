@@ -68,19 +68,13 @@
     <Compile Include="General\Catalogo_Data.cs" />
     <Compile Include="General\Categoria_Data.cs" />
     <Compile Include="General\Grupo_Data.cs" />
-    <Compile Include="General\Impuesto_Data.cs" />
     <Compile Include="General\Linea_Data.cs" />
-    <Compile Include="General\OfertaDet_Data.cs" />
     <Compile Include="General\Oferta_Data.cs" />
     <Compile Include="General\Producto_Data.cs" />
-    <Compile Include="General\ProveedorSucursal_Data.cs" />
     <Compile Include="General\Proveedor_Data.cs" />
     <Compile Include="General\Subasta_Data.cs" />
     <Compile Include="General\Usuario_Data.cs" />
     <Compile Include="Grupo.cs">
-      <DependentUpon>ModelGeneral.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Impuesto.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Linea.cs">
@@ -104,17 +98,11 @@
     <Compile Include="Oferta.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
-    <Compile Include="OfertaDet.cs">
-      <DependentUpon>ModelGeneral.tt</DependentUpon>
-    </Compile>
     <Compile Include="Producto.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor.cs">
-      <DependentUpon>ModelGeneral.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProveedorSucursal.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Subasta.cs">

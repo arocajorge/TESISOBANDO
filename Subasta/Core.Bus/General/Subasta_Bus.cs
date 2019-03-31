@@ -11,11 +11,11 @@ namespace Core.Bus.General
     public class Subasta_Bus
     {
         Subasta_Data odata = new Subasta_Data();
-        public List<Subasta_Info> GetList()
+        public List<Subasta_Info> GetList(string IdUsuario)
         {
             try
             {
-                return odata.GetList();
+                return odata.GetList(IdUsuario);
             }
             catch (Exception)
             {

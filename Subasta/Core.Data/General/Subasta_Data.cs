@@ -9,14 +9,33 @@ namespace Core.Data.General
 {
     public class Subasta_Data
     {
-        public List<Subasta_Info> GetList()
+        public List<Subasta_Info> GetList(string IdUsuario)
         {
             try
             {
                 List<Subasta_Info> Lista;
                 using (EntitiesGeneral db = new EntitiesGeneral())
                 {
-                    Lista = db.Subasta.Select(q => new Subasta_Info
+                    if (!string.IsNullOrEmpty(IdUsuario))
+                    {
+                        Lista = db.Subasta.Include("Producto").Where(q=>q.IdUsuario == IdUsuario).Select(q => new Subasta_Info
+                        {
+                            IdProducto = q.IdProducto,
+                            IdSubasta = q.IdSubasta,
+                            IdUsuario = q.IdUsuario,
+                            su_Cantidad = q.su_Cantidad,
+                            su_Descripcion = q.su_Descripcion,
+                            su_Estado = q.su_Estado,
+                            su_EstadoCierre = q.su_EstadoCierre,
+                            su_FechaFin = q.su_FechaFin,
+                            su_Observacion = q.su_Observacion,
+
+                            pr_Descripcion = q.Producto.pr_Descripcion
+
+                        }).ToList();
+                    }
+                    else
+                    Lista = db.Subasta.Include("Producto").Select(q => new Subasta_Info
                     {
                         IdProducto = q.IdProducto,
                         IdSubasta = q.IdSubasta,
@@ -26,8 +45,9 @@ namespace Core.Data.General
                         su_Estado = q.su_Estado,
                         su_EstadoCierre = q.su_EstadoCierre,
                         su_FechaFin = q.su_FechaFin,
-                        su_Observacion = q.su_Observacion
-                        
+                        su_Observacion = q.su_Observacion,
+
+                        pr_Descripcion = q.Producto.pr_Descripcion
                     }).ToList();
 
                 }

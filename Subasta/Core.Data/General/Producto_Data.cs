@@ -1,4 +1,5 @@
 ﻿using Core.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,6 @@ namespace Core.Data.General
                             IdCatalogoModelo = q.IdCatalogoModelo,
                             IdCatalogoTipo = q.IdCatalogoTipo,
                             IdGrupo = q.IdGrupo,
-                            IdImpuestoIva = q.IdImpuestoIva,
                             pr_Codigo = q.pr_Codigo,
                             pr_Estado = q.pr_Estado
                         }).ToList();
@@ -43,7 +43,6 @@ namespace Core.Data.General
                             IdCatalogoModelo = q.IdCatalogoModelo,
                             IdCatalogoTipo = q.IdCatalogoTipo,
                             IdGrupo = q.IdGrupo,
-                            IdImpuestoIva = q.IdImpuestoIva,
                             pr_Codigo = q.pr_Codigo,
                             pr_Estado = q.pr_Estado
                         }).ToList();
@@ -79,7 +78,6 @@ namespace Core.Data.General
                                 IdCatalogoModelo = Entity.IdCatalogoModelo,
                                 IdCatalogoTipo = Entity.IdCatalogoTipo,
                                 IdGrupo = Entity.IdGrupo,
-                                IdImpuestoIva = Entity.IdImpuestoIva,
                                 pr_Codigo = Entity.pr_Codigo,
                                 pr_Estado = Entity.pr_Estado,
 
@@ -133,7 +131,6 @@ namespace Core.Data.General
                         IdCatalogoModelo = info.IdCatalogoModelo,
                         IdCatalogoTipo = info.IdCatalogoTipo,
                         IdGrupo = info.IdGrupo,
-                        IdImpuestoIva = info.IdImpuestoIva,
                         pr_Codigo = info.pr_Codigo,
                         pr_Estado = true
                     });
@@ -163,7 +160,6 @@ namespace Core.Data.General
                     Entity.IdCatalogoModelo = info.IdCatalogoModelo;
                     Entity.IdCatalogoTipo = info.IdCatalogoTipo;
                     Entity.IdGrupo = info.IdGrupo;
-                    Entity.IdImpuestoIva = info.IdImpuestoIva;
                     Entity.pr_Codigo = info.pr_Codigo;
                     db.SaveChanges();
                 }
@@ -197,5 +193,55 @@ namespace Core.Data.General
             }
         }
 
+        #region Bajo demanda
+        public List<Producto_Info> GetList(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            try
+            {
+                var skip = args.BeginIndex;
+                var take = args.EndIndex - args.BeginIndex + 1;
+                List<Producto_Info> Lista = new List<Producto_Info>();
+                Lista = get_list(skip, take, args.Filter);
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<Producto_Info> get_list(int skip, int take, string filter)
+        {
+            try
+            {
+                List<Producto_Info> Lista;
+
+                using (EntitiesGeneral Context = new EntitiesGeneral())
+                {
+                    Lista = (from q in Context.Producto
+                             where q.pr_Estado == true
+                             && (q.IdProducto.ToString() + " " + q.pr_Descripcion).Contains(filter)
+                             select new Producto_Info
+                             {
+                                 IdProducto = q.IdProducto,
+                                 pr_Descripcion = q.pr_Descripcion
+                             })
+                             .OrderBy(p => p.IdProducto)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public Producto_Info GetInfo(ListEditItemRequestedByValueEventArgs args)
+        {
+            return GetInfo(args.Value == null ? 0 : (decimal)args.Value);
+        }
+        #endregion
     }
 }

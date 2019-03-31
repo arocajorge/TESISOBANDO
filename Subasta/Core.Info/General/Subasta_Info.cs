@@ -17,5 +17,6 @@ namespace Core.Info.General
         public System.DateTime su_FechaFin { get; set; }
         public bool su_Estado { get; set; }
         public string IdUsuario { get; set; }
+        public string pr_Descripcion { get; set; }
     }
 }
