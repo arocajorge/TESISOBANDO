@@ -72,6 +72,8 @@
     <Compile Include="General\Oferta_Data.cs" />
     <Compile Include="General\Producto_Data.cs" />
     <Compile Include="General\Proveedor_Data.cs" />
+    <Compile Include="General\RPT_001_Data.cs" />
+    <Compile Include="General\RPT_002_Data.cs" />
     <Compile Include="General\Subasta_Data.cs" />
     <Compile Include="General\Usuario_Data.cs" />
     <Compile Include="Grupo.cs">
@@ -105,6 +107,9 @@
     <Compile Include="Proveedor.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="SPRPT_002_Result.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Subasta.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
@@ -112,6 +117,9 @@
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="UsuarioPerfil.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWRPT_001.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
   </ItemGroup>

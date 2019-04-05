@@ -29,6 +29,7 @@
         <AssociationConnector Association="ModelGeneral.FK_Subasta_Producto" />
         <EntityTypeShape EntityType="ModelGeneral.Oferta" Width="1.5" PointX="10.5" PointY="5" />
         <AssociationConnector Association="ModelGeneral.FK_Oferta_Subasta" />
+        <EntityTypeShape EntityType="ModelGeneral.VWRPT_001" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

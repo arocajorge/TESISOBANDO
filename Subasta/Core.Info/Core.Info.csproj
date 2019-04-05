@@ -50,6 +50,8 @@
     <Compile Include="General\Oferta_Info.cs" />
     <Compile Include="General\Producto_Info.cs" />
     <Compile Include="General\Proveedor_Info.cs" />
+    <Compile Include="General\RPT_001_Info.cs" />
+    <Compile Include="General\RPT_002_Info.cs" />
     <Compile Include="General\Subasta_Info.cs" />
     <Compile Include="General\Usuario_Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -138,6 +138,40 @@
           <Property Name="IdPerfil" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="up_Descripcion" Type="varchar(max)" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBSUBASTA.dbo.VWRPT_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWRPT_001">
+          <Key>
+            <PropertyRef Name="IdSubasta" />
+            <PropertyRef Name="IdOferta" />
+            <PropertyRef Name="su_Descripcion" />
+            <PropertyRef Name="pr_Descripcion" />
+            <PropertyRef Name="su_Cantidad" />
+            <PropertyRef Name="su_EstadoCierre" />
+            <PropertyRef Name="su_FechaFin" />
+            <PropertyRef Name="su_Estado" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="of_Plazo" />
+            <PropertyRef Name="of_Total" />
+            <PropertyRef Name="of_EstadoGanador" />
+          </Key>
+          <Property Name="IdSubasta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdOferta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="su_Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="pr_Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="su_Cantidad" Type="float" Nullable="false" />
+          <Property Name="su_EstadoCierre" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="su_FechaFin" Type="datetime" Nullable="false" />
+          <Property Name="su_Estado" Type="bit" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="of_Plazo" Type="int" Nullable="false" />
+          <Property Name="pv_Descripcion" Type="varchar(max)" />
+          <Property Name="of_Observacion" Type="varchar(max)" />
+          <Property Name="of_Total" Type="float" Nullable="false" />
+          <Property Name="of_EstadoGanador" Type="varchar" MaxLength="7" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Auditoria_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Auditoria" Type="Self.Auditoria" Multiplicity="*" />
@@ -282,6 +316,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SPRPT_002" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProveedorIni" Type="int" Mode="In" />
+          <Parameter Name="IdProveedorFin" Type="int" Mode="In" />
+          <Parameter Name="FechaIni" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelGeneralStoreContainer">
           <EntitySet Name="Auditoria" EntityType="Self.Auditoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Catalogo" EntityType="Self.Catalogo" Schema="dbo" store:Type="Tables" />
@@ -295,6 +335,25 @@
           <EntitySet Name="Subasta" EntityType="Self.Subasta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioPerfil" EntityType="Self.UsuarioPerfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VWRPT_001" EntityType="Self.VWRPT_001" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VWRPT_001].[IdSubasta] AS [IdSubasta], 
+    [VWRPT_001].[IdOferta] AS [IdOferta], 
+    [VWRPT_001].[su_Descripcion] AS [su_Descripcion], 
+    [VWRPT_001].[pr_Descripcion] AS [pr_Descripcion], 
+    [VWRPT_001].[su_Cantidad] AS [su_Cantidad], 
+    [VWRPT_001].[su_EstadoCierre] AS [su_EstadoCierre], 
+    [VWRPT_001].[su_FechaFin] AS [su_FechaFin], 
+    [VWRPT_001].[su_Estado] AS [su_Estado], 
+    [VWRPT_001].[IdProducto] AS [IdProducto], 
+    [VWRPT_001].[IdProveedor] AS [IdProveedor], 
+    [VWRPT_001].[of_Plazo] AS [of_Plazo], 
+    [VWRPT_001].[pv_Descripcion] AS [pv_Descripcion], 
+    [VWRPT_001].[of_Observacion] AS [of_Observacion], 
+    [VWRPT_001].[of_Total] AS [of_Total], 
+    [VWRPT_001].[of_EstadoGanador] AS [of_EstadoGanador]
+    FROM [dbo].[VWRPT_001] AS [VWRPT_001]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Auditoria_Usuario" Association="Self.FK_Auditoria_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Auditoria" EntitySet="Auditoria" />
@@ -603,6 +662,13 @@
             <End Role="Subasta" EntitySet="Subasta" />
             <End Role="Oferta" EntitySet="Oferta" />
           </AssociationSet>
+          <EntitySet Name="VWRPT_001" EntityType="ModelGeneral.VWRPT_001" />
+          <FunctionImport Name="SPRPT_002" ReturnType="Collection(ModelGeneral.SPRPT_002_Result)">
+            <Parameter Name="IdProveedorIni" Mode="In" Type="Int32" />
+            <Parameter Name="IdProveedorFin" Mode="In" Type="Int32" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Producto">
           <Key>
@@ -711,6 +777,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VWRPT_001">
+          <Key>
+            <PropertyRef Name="IdSubasta" />
+            <PropertyRef Name="IdOferta" />
+            <PropertyRef Name="su_Descripcion" />
+            <PropertyRef Name="pr_Descripcion" />
+            <PropertyRef Name="su_Cantidad" />
+            <PropertyRef Name="su_EstadoCierre" />
+            <PropertyRef Name="su_FechaFin" />
+            <PropertyRef Name="su_Estado" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="of_Plazo" />
+            <PropertyRef Name="of_Total" />
+            <PropertyRef Name="of_EstadoGanador" />
+          </Key>
+          <Property Name="IdSubasta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdOferta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="su_Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pr_Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="su_Cantidad" Type="Double" Nullable="false" />
+          <Property Name="su_EstadoCierre" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="su_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="su_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="of_Plazo" Type="Int32" Nullable="false" />
+          <Property Name="pv_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="of_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="of_Total" Type="Double" Nullable="false" />
+          <Property Name="of_EstadoGanador" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="SPRPT_002_Result">
+          <Property Type="Decimal" Name="IdProveedor" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="pv_Descripcion" Nullable="false" />
+          <Property Type="Int32" Name="OfertasGanadas" Nullable="false" />
+          <Property Type="Int32" Name="OfertasParticipadas" Nullable="false" />
+          <Property Type="Int32" Name="PorcentajeGanadas" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -862,6 +967,38 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VWRPT_001">
+            <EntityTypeMapping TypeName="ModelGeneral.VWRPT_001">
+              <MappingFragment StoreEntitySet="VWRPT_001">
+                <ScalarProperty Name="of_EstadoGanador" ColumnName="of_EstadoGanador" />
+                <ScalarProperty Name="of_Total" ColumnName="of_Total" />
+                <ScalarProperty Name="of_Observacion" ColumnName="of_Observacion" />
+                <ScalarProperty Name="pv_Descripcion" ColumnName="pv_Descripcion" />
+                <ScalarProperty Name="of_Plazo" ColumnName="of_Plazo" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="su_Estado" ColumnName="su_Estado" />
+                <ScalarProperty Name="su_FechaFin" ColumnName="su_FechaFin" />
+                <ScalarProperty Name="su_EstadoCierre" ColumnName="su_EstadoCierre" />
+                <ScalarProperty Name="su_Cantidad" ColumnName="su_Cantidad" />
+                <ScalarProperty Name="pr_Descripcion" ColumnName="pr_Descripcion" />
+                <ScalarProperty Name="su_Descripcion" ColumnName="su_Descripcion" />
+                <ScalarProperty Name="IdOferta" ColumnName="IdOferta" />
+                <ScalarProperty Name="IdSubasta" ColumnName="IdSubasta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPRPT_002" FunctionName="ModelGeneral.Store.SPRPT_002">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelGeneral.SPRPT_002_Result">
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="pv_Descripcion" ColumnName="pv_Descripcion" />
+                <ScalarProperty Name="OfertasGanadas" ColumnName="OfertasGanadas" />
+                <ScalarProperty Name="OfertasParticipadas" ColumnName="OfertasParticipadas" />
+                <ScalarProperty Name="PorcentajeGanadas" ColumnName="PorcentajeGanadas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
