@@ -7152,6 +7152,7 @@
     <Content Include="Views\Subasta\_GridViewPartial_subasta_det.cshtml" />
     <Content Include="Views\Subasta\Modificar.cshtml" />
     <Content Include="Views\Reportes\RPT_001.cshtml" />
+    <Content Include="Views\Reportes\RPT_002.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -7184,6 +7185,9 @@
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\RPT_001_Rpt.resx">
       <DependentUpon>RPT_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RPT_002_Rpt.resx">
+      <DependentUpon>RPT_002_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

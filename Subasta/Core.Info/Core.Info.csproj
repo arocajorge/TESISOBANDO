@@ -45,6 +45,7 @@
     <Compile Include="General\CatalogoTipo_Info.cs" />
     <Compile Include="General\Catalogo_Info.cs" />
     <Compile Include="General\Categoria_Info.cs" />
+    <Compile Include="General\cl_filtros_Info.cs" />
     <Compile Include="General\Grupo_Info.cs" />
     <Compile Include="General\Linea_Info.cs" />
     <Compile Include="General\Oferta_Info.cs" />
