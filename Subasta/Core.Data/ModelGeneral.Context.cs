@@ -12,6 +12,8 @@ namespace Core.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class EntitiesGeneral : DbContext
     {
@@ -37,5 +39,27 @@ namespace Core.Data
         public virtual DbSet<UsuarioPerfil> UsuarioPerfil { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Oferta> Oferta { get; set; }
+        public virtual DbSet<VWRPT_001> VWRPT_001 { get; set; }
+    
+        public virtual ObjectResult<SPRPT_002_Result> SPRPT_002(Nullable<int> idProveedorIni, Nullable<int> idProveedorFin, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin)
+        {
+            var idProveedorIniParameter = idProveedorIni.HasValue ?
+                new ObjectParameter("IdProveedorIni", idProveedorIni) :
+                new ObjectParameter("IdProveedorIni", typeof(int));
+    
+            var idProveedorFinParameter = idProveedorFin.HasValue ?
+                new ObjectParameter("IdProveedorFin", idProveedorFin) :
+                new ObjectParameter("IdProveedorFin", typeof(int));
+    
+            var fechaIniParameter = fechaIni.HasValue ?
+                new ObjectParameter("FechaIni", fechaIni) :
+                new ObjectParameter("FechaIni", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPRPT_002_Result>("SPRPT_002", idProveedorIniParameter, idProveedorFinParameter, fechaIniParameter, fechaFinParameter);
+        }
     }
 }

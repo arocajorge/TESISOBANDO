@@ -97,5 +97,14 @@
 
             });
         });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "*";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("RPT_001", "Reportes", new { Area = "", IdSubasta = DataBinder.Eval(c.DataItem, "IdSubasta").ToString() }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
     });
 }@grid.Bind(Model).GetHtml()

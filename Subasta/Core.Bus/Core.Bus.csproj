@@ -49,6 +49,8 @@
     <Compile Include="General\Oferta_Bus.cs" />
     <Compile Include="General\Producto_Bus.cs" />
     <Compile Include="General\Proveedor_Bus.cs" />
+    <Compile Include="General\RPT_001_Bus.cs" />
+    <Compile Include="General\RPT_002_Bus.cs" />
     <Compile Include="General\Subasta_Bus.cs" />
     <Compile Include="General\Usuario_Bus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
