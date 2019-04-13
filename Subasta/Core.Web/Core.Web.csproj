@@ -7437,7 +7437,7 @@
     <Content Include="Views\Subasta\Modificar.cshtml" />
     <Content Include="Views\Shared\_LayoutConsulta.cshtml" />
     <Content Include="Views\Reportes\RPT_001.cshtml" />
-    <Content Include="Views\Reportes\RPT_002.csh
+    <Content Include="Views\Reportes\RPT_002.cshtml"/>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
