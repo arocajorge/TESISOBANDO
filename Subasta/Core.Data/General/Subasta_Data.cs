@@ -9,14 +9,14 @@ namespace Core.Data.General
 {
     public class Subasta_Data
     {
-        public List<Subasta_Info> GetList(string IdUsuario)
+        public List<Subasta_Info> GetList(string IdUsuario, decimal IdProveedor)
         {
             try
             {
                 List<Subasta_Info> Lista;
                 using (EntitiesGeneral db = new EntitiesGeneral())
                 {
-                    if (!string.IsNullOrEmpty(IdUsuario))
+                    if (IdProveedor == 0)
                     {
                         Lista = db.Subasta.Include("Producto").Where(q=>q.IdUsuario == IdUsuario).Select(q => new Subasta_Info
                         {
@@ -153,7 +153,6 @@ namespace Core.Data.General
                     Entity.IdUsuario = info.IdUsuario;
                     Entity.su_Cantidad = info.su_Cantidad;
                     Entity.su_Descripcion = info.su_Descripcion;
-                    Entity.su_EstadoCierre = info.su_EstadoCierre;
                     Entity.su_FechaFin = info.su_FechaFin;
                     Entity.su_Observacion = info.su_Observacion;
                     db.SaveChanges();
@@ -187,5 +186,25 @@ namespace Core.Data.General
             }
         }
 
+        public bool EscogerGanador(decimal IdSubasta)
+        {
+            try
+            {
+                using (EntitiesGeneral db = new EntitiesGeneral())
+                {
+                    var Entity = db.Subasta.Where(q => q.IdSubasta == IdSubasta).FirstOrDefault();
+                    if (Entity != null)
+                        Entity.su_EstadoCierre = true;
+                    db.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

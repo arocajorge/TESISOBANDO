@@ -1,5 +1,5 @@
 ﻿using Core.Bus.General;
-using Core.Erp.Web.Helps;
+using Core.Web.Helps;
 using Core.Info.General;
 using DevExpress.Web;
 using System;

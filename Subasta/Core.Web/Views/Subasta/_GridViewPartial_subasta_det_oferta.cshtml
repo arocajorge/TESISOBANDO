@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_subasta_det";
-        settings.CallbackRouteValues = new { Controller = "Subasta", Action = "GridViewPartial_subasta_det" };
+        settings.CallbackRouteValues = new { Controller = "Subasta", Action = "GridViewPartial_subasta_det_oferta" };
 
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Subasta", Action = "EditingAdd" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Subasta", Action = "EditingUpdate" };
@@ -15,7 +15,7 @@
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
 
-        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowNewButtonInHeader = true;
 
@@ -84,22 +84,6 @@
 
             column.Visible = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;
-        });
-        settings.Columns.Add(column =>
-        {
-            column.Caption = "*";
-            column.FieldName = "IdOferta";
-            column.Width = Unit.Percentage(10);
-            column.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            column.SetDataItemTemplateContent(c =>
-            {
-                Html.DevExpress().Button(settingsBtn =>
-                {
-                    settingsBtn.Name = "btn" + c.KeyValue;
-                    settingsBtn.Text = "Ganadora";
-                    settingsBtn.ClientSideEvents.Click = "function(s, e) {EscogerGanador('" + c.KeyValue + "');}";
-                }).Render();
-            });
         });
     });
     if (ViewData["EditError"] != null)

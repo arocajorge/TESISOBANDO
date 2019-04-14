@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace Core.Erp.Web.Helps
+namespace Core.Web.Helps
 {
     public interface ISessionValueProvider
     {

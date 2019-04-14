@@ -37,6 +37,19 @@ namespace Core.Bus.General
             }
         }
 
+        public Proveedor_Info GetInfo(string pv_CedulaRuc)
+        {
+            try
+            {
+                return odata.GetInfo(pv_CedulaRuc);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool GuardarDB(Proveedor_Info info)
         {
             try

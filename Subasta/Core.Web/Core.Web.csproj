@@ -7437,7 +7437,10 @@
     <Content Include="Views\Subasta\Modificar.cshtml" />
     <Content Include="Views\Shared\_LayoutConsulta.cshtml" />
     <Content Include="Views\Reportes\RPT_001.cshtml" />
-    <Content Include="Views\Reportes\RPT_002.cshtml"/>
+    <Content Include="Views\Reportes\RPT_002.cshtml" />
+    <Content Include="Views\Subasta\Ofertar.cshtml" />
+    <Content Include="Views\Subasta\_GridViewPartial_subasta_det_oferta.cshtml" />
+    <Content Include="Views\Subasta\_CmbProductoReadOnly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

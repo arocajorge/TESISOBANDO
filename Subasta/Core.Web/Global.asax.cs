@@ -1,4 +1,4 @@
-﻿using Core.Erp.Web.Helps;
+﻿using Core.Web.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;

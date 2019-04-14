@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Data.General
 {
-   public class Oferta_Data
+    public class Oferta_Data
     {
         public List<Oferta_Info> GetList(bool mostrar_anulados)
         {
@@ -16,7 +16,7 @@ namespace Core.Data.General
                 List<Oferta_Info> Lista;
                 using (EntitiesGeneral db = new EntitiesGeneral())
                 {
-                    if(mostrar_anulados)
+                    if (mostrar_anulados)
                     {
                         Lista = db.Oferta.Select(q => new Oferta_Info
                         {
@@ -49,10 +49,12 @@ namespace Core.Data.General
             }
         }
 
-        public List<Oferta_Info> GetList(decimal IdSubasta)
+        public List<Oferta_Info> GetList(decimal IdSubasta, decimal IdOferta)
         {
             try
             {
+                decimal IdOfertaIni = IdOferta;
+                decimal IdOfertaFin = IdOferta == 0 ? 999999 : IdOferta;
                 List<Oferta_Info> Lista;
                 using (EntitiesGeneral db = new EntitiesGeneral())
                 {
@@ -60,6 +62,7 @@ namespace Core.Data.General
                              join p in db.Proveedor
                              on q.IdProveedor equals p.IdProveedor
                              where q.of_Estado == true && q.IdSubasta == IdSubasta
+                             && IdOfertaIni <= q.IdProveedor && q.IdProveedor <= IdOfertaFin
                              select new Oferta_Info
                              {
                                  IdOferta = q.IdOferta,
@@ -122,7 +125,7 @@ namespace Core.Data.General
                     var lst = from q in db.Oferta
                               select q;
                     if (lst.Count() > 0)
-                        Id= lst.Max(q => q.IdOferta) + 1;
+                        Id = lst.Max(q => q.IdOferta) + 1;
                 }
                 return Id;
             }
@@ -139,20 +142,26 @@ namespace Core.Data.General
             {
                 using (EntitiesGeneral db = new EntitiesGeneral())
                 {
-                    db.Oferta.Add(new Oferta
+                    var Entity = db.Oferta.Where(q => q.IdSubasta == info.IdSubasta && q.IdProveedor == info.IdProveedor).FirstOrDefault();
+                    if (Entity == null)
                     {
-                        IdProveedor = info.IdProveedor,
-                        IdOferta = info.IdOferta=GetId(),
-                        IdSubasta = info.IdSubasta,
-                        of_Estado = true,
-                        of_EstadoGanador = info.of_EstadoGanador,
-                        of_Fecha = info.of_Fecha,
-                        of_FechaFin = info.of_FechaFin,
-                        of_Observacion = info.of_Observacion,
-                        of_Plazo = info.of_Plazo,
-                        of_Total = info.of_Total
-                    });
-                    db.SaveChanges();
+                        db.Oferta.Add(new Oferta
+                        {
+                            IdProveedor = info.IdProveedor,
+                            IdOferta = info.IdOferta = GetId(),
+                            IdSubasta = info.IdSubasta,
+                            of_Estado = true,
+                            of_EstadoGanador = false,
+                            of_Fecha = info.of_Fecha,
+                            of_FechaFin = info.of_FechaFin,
+                            of_Observacion = info.of_Observacion,
+                            of_Plazo = info.of_Plazo,
+                            of_Total = info.of_Total
+                        });
+                        db.SaveChanges();
+                    }
+                    else
+                        ModificarDB(info);
                 }
                 return true;
             }
@@ -214,5 +223,24 @@ namespace Core.Data.General
             }
         }
 
+        public bool EscogerGanador(decimal  IdOferta)
+        {
+            try
+            {
+                using (EntitiesGeneral db = new EntitiesGeneral())
+                {
+                    var Entity = db.Oferta.Where(q => q.IdOferta == IdOferta).FirstOrDefault();
+                    if (Entity != null)
+                        Entity.of_EstadoGanador = true;
+                    db.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

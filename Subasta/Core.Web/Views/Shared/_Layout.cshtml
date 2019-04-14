@@ -85,9 +85,9 @@
             <!-- Logo -->
             <a href="#" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>SUBASTAS</b></span>
+                <span class="logo-mini"><b>UG</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>SUBASTAS</b></span>
+                <span class="logo-lg"><b>SUBASTAS UG</b></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -108,10 +108,14 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs">@Core.Erp.Web.Helps.SessionFixed.NombreUsuario</span>
+                                <span class="hidden-xs">@Core.Web.Helps.SessionFixed.NombreUsuario</span>
                             </a>
+                            
                         </li>
                         <li>
+                            <a href="~/Account/Login">
+                                <span class="hidden-xs">Salir</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -125,56 +129,80 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">Navegación</li>
+                    @if (Core.Web.Helps.SessionFixed.IdProveedor == "0")
+                    {
+                        <li class="treeview active">
+                            <a href="#">
+                                <i class="fa fa-files-o"></i>
+                                <span>Menú</span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="treeview">
+                                    <a href="#">
 
-                    <li class="treeview active">
-                        <a href="#">
-                            <i class="fa fa-files-o"></i>
-                            <span>Menú</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="treeview">
-                                <a href="#">
-
-                                    <i class="fa fa-circle-o"></i> Mantenimientos
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="/CatalogoTipo/Index"><i class="fa fa-circle-o"></i>Catálogos</a></li>
-                                    <li><a href="/Categoria/Index"><i class="fa fa-circle-o"></i>Categorización</a></li>
-                                    <li><a href="/Impuesto/Index"><i class="fa fa-circle-o"></i>Impuestos</a></li>
-                                    <li><a href="/Producto/Index"><i class="fa fa-circle-o"></i>Productos</a></li>
-                                    <li><a href="/Proveedor/Index"><i class="fa fa-circle-o"></i>Proveedores</a></li>                                    
-                                </ul>
-                            </li>
-                            <li class="treeview active">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Transacciones
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu active">
-                                    <li><a href="/Subasta/Index"><i class="fa fa-circle-o"></i>Subastas</a></li>
-                                    <li><a href="/Oferta/Index"><i class="fa fa-circle-o"></i>Oferta</a></li>
-                                </ul>
-                            </li>
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Reportes
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu active">
-                                    <li><a href="/Reportes/RPT_002"><i class="fa fa-circle-o"></i>Listado de ofertas por proveedor</a></li>      
-                                </ul>
-                            </li>
+                                        <i class="fa fa-circle-o"></i> Mantenimientos
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li><a href="/CatalogoTipo/Index"><i class="fa fa-circle-o"></i>Catálogos</a></li>
+                                        <li><a href="/Categoria/Index"><i class="fa fa-circle-o"></i>Categorización</a></li>
+                                        <li><a href="/Impuesto/Index"><i class="fa fa-circle-o"></i>Impuestos</a></li>
+                                        <li><a href="/Producto/Index"><i class="fa fa-circle-o"></i>Productos</a></li>
+                                        <li><a href="/Proveedor/Index"><i class="fa fa-circle-o"></i>Proveedores</a></li>
+                                    </ul>
+                                </li>
+                                <li class="treeview active">
+                                    <a href="#">
+                                        <i class="fa fa-circle-o"></i> Transacciones
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu active">
+                                        <li><a href="/Subasta/Index"><i class="fa fa-circle-o"></i>Subastas</a></li>
+                                    </ul>
+                                </li>
+                                <li class="treeview">
+                                    <a href="#">
+                                        <i class="fa fa-circle-o"></i> Reportes
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu active">
+                                        <li><a href="/Reportes/RPT_002"><i class="fa fa-circle-o"></i>Listado de ofertas por proveedor</a></li>
+                                    </ul>
+                                </li>
 
 
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="treeview active">
+                            <a href="#">
+                                <i class="fa fa-files-o"></i>
+                                <span>Menú</span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="treeview active">
+                                    <a href="#">
+                                        <i class="fa fa-circle-o"></i> Transacciones
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu active">
+                                        <li><a href="/Subasta/Index"><i class="fa fa-circle-o"></i>Subastas</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -201,7 +229,7 @@
                     <!-- /.box-body -->
                     <div class="box-footer">
 
-                        @Core.Erp.Web.Helps.SessionFixed.NombreUsuario
+                        @Core.Web.Helps.SessionFixed.NombreUsuario
                     </div>
                     <!-- /.box-footer-->
                 </div>
@@ -314,7 +342,7 @@
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <span class="hidden-xs">Usuario: @Core.Erp.Web.Helps.SessionFixed.NombreUsuario</span>
+                                    <span class="hidden-xs">Usuario: @Core.Web.Helps.SessionFixed.NombreUsuario</span>
                                 </a>
                             </li>
                             <li>
@@ -412,7 +440,7 @@
                         <!-- /.box-body -->
                         <div class="box-footer">
 
-                            @Core.Erp.Web.Helps.SessionFixed.NombreUsuario
+                            @Core.Web.Helps.SessionFixed.NombreUsuario
                         </div>
                         <!-- /.box-footer-->
                     </div>

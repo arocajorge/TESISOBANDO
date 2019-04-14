@@ -57,13 +57,17 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
+            if (Convert.ToBoolean(e.GetValue("su_EstadoCierre")) == true)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
+            }
         };
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "su_Estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "su_Estado")) == true && Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "su_EstadoCierre")) == false && Core.Web.Helps.SessionFixed.IdProveedor == "0")
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdSubasta = DataBinder.Eval(tc.DataItem, "IdSubasta") }) + "&nbsp;" +
@@ -71,12 +75,21 @@
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "su_Estado")) == true && Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "su_EstadoCierre")) == false && Core.Web.Helps.SessionFixed.IdProveedor != "0")
+                {
+                     ViewContext.Writer.Write(
+                Html.ActionLink("Ofertar", "Ofertar", new { IdSubasta = DataBinder.Eval(tc.DataItem, "IdSubasta") }));
+                }
             });
             c.SetHeaderTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
+                if (Core.Web.Helps.SessionFixed.IdProveedor == "0")
+                {
+                    ViewContext.Writer.Write(
                     Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
                 );
+                }
+
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;

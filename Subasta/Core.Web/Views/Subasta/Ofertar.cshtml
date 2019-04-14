@@ -1,21 +1,46 @@
 ﻿@model Core.Info.General.Subasta_Info
 @{
-    ViewBag.Title = "Nueva subasta";
+    ViewBag.Title = "Ofertar subasta";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario))
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@using (Html.BeginForm("Nuevo","Subasta",FormMethod.Post,new { @role = "form", @class = "form"}))
+<script type="text/javascript">
+    function EscogerGanador(ID) {
+        var datos = {
+            IdOferta: ID,
+            IdSubasta: $("#IdSubasta").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EscogerGanador", "Subasta")',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#myform").submit();
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Ofertar","Subasta",FormMethod.Post,new { @role = "form", @class = "form", @id = "myform" }))
 {
+    @Html.HiddenFor(q=> q.IdSubasta, new { @id = "IdSubasta"})
+    @Html.HiddenFor(q=> q.IdUsuario)
     <div class="row">
         <div class="col-md-12">
              <div class="col-md-10">
                  <div class="form-group">
                      <label for="su_Descripcion">Descripción*</label>
-                     @Html.TextBoxFor(q=> q.su_Descripcion, new { @class = "form-control"})
+                     @Html.TextBoxFor(q=> q.su_Descripcion, new { @class = "form-control", @readonly = "readonly"})
                      @Html.ValidationMessageFor(q=> q.su_Descripcion,"",new { @class = "text-danger"})
                  </div>
              </div>
@@ -34,6 +59,7 @@
                             settings.Properties.EditFormatString = "dd/MM/yyyy";
                             settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                             settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                            settings.ReadOnly = true;
                         }).GetHtml()
                         @Html.ValidationMessageFor(q => q.su_FechaFin, "", new { @class = "text-danger" })
                     </div>
@@ -47,14 +73,14 @@
             <div class="col-md-10">
                 <div class="form-group">
                     <label for="IdProducto">Producto*</label>
-                    @Html.Partial("_CmbProducto", Model.IdProducto)
+                    @Html.Partial("_CmbProductoReadOnly", Model.IdProducto)
                     @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="su_Cantidad">Cantidad*</label>
-                    @Html.TextBoxFor(q => q.su_Cantidad, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.su_Cantidad, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.su_Cantidad, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -65,20 +91,26 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="pr_Observacion">Observaciones</label>
-                    @Html.TextAreaFor(q => q.su_Observacion, new { @class = "form-control", @id = "pr_Observacion", @rows = "2" })
+                    @Html.TextAreaFor(q => q.su_Observacion, new { @class = "form-control", @id = "pr_Observacion", @rows = "2", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.su_Observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_subasta_det_oferta")
+            </div>
+        </div>
+    </div>
+    
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Subasta",null)">Cancelar</a>
     </div>
-
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
-
+    
 }

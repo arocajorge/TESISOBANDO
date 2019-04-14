@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Core.Erp.Web.Helps
+namespace Core.Web.Helps
 {
     public class SessionTimeoutAttribute : ActionFilterAttribute
     {

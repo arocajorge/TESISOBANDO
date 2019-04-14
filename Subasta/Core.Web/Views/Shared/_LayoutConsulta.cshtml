@@ -109,7 +109,7 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs">@Core.Erp.Web.Helps.SessionFixed.NombreUsuario</span>
+                                <span class="hidden-xs">@Core.Web.Helps.SessionFixed.NombreUsuario</span>
                             </a>
                         </li>
                         <li>
@@ -127,6 +127,8 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">Navegación</li>
 
+                @if (Core.Web.Helps.SessionFixed.IdProveedor == "0")
+                {
                     <li class="treeview active">
                         <a href="#">
                             <i class="fa fa-files-o"></i>
@@ -146,7 +148,7 @@
                                     <li><a href="/Categoria/Index"><i class="fa fa-circle-o"></i>Categorización</a></li>
                                     <li><a href="/Impuesto/Index"><i class="fa fa-circle-o"></i>Impuestos</a></li>
                                     <li><a href="/Producto/Index"><i class="fa fa-circle-o"></i>Productos</a></li>
-                                    <li><a href="/Proveedor/Index"><i class="fa fa-circle-o"></i>Proveedores</a></li>                                    
+                                    <li><a href="/Proveedor/Index"><i class="fa fa-circle-o"></i>Proveedores</a></li>
                                 </ul>
                             </li>
                             <li class="treeview active">
@@ -158,7 +160,6 @@
                                 </a>
                                 <ul class="treeview-menu active">
                                     <li><a href="/Subasta/Index"><i class="fa fa-circle-o"></i>Subastas</a></li>
-                                    <li><a href="/Oferta/Index"><i class="fa fa-circle-o"></i>Oferta</a></li>
                                 </ul>
                             </li>
                             <li class="treeview">
@@ -168,12 +169,37 @@
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
                                 </a>
-                                <ul class="treeview-menu active"></ul>
+                                <ul class="treeview-menu active">
+                                    <li><a href="/Reportes/RPT_002"><i class="fa fa-circle-o"></i>Listado de ofertas por proveedor</a></li>
+                                </ul>
                             </li>
 
 
                         </ul>
                     </li>
+                }
+                else
+                {
+                    <li class="treeview active">
+                        <a href="#">
+                            <i class="fa fa-files-o"></i>
+                            <span>Menú</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="treeview active">
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i> Transacciones
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu active">
+                                    <li><a href="/Subasta/Index"><i class="fa fa-circle-o"></i>Subastas</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                }
                 </ul>
             </section>
             <!-- /.sidebar -->

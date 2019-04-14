@@ -24,11 +24,11 @@ namespace Core.Bus.General
             }
         }
 
-        public List<Oferta_Info> GetList(decimal IdSubasta)
+        public List<Oferta_Info> GetList(decimal IdSubasta, decimal IdProveedor)
         {
             try
             {
-                return odata.GetList(IdSubasta);
+                return odata.GetList(IdSubasta, IdProveedor);
             }
             catch (Exception)
             {
@@ -55,6 +55,19 @@ namespace Core.Bus.General
             try
             {
                 return odata.GuardarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool EscogerGanador(decimal IdOferta)
+        {
+            try
+            {
+                return odata.EscogerGanador(IdOferta);
             }
             catch (Exception)
             {

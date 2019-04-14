@@ -11,11 +11,11 @@ namespace Core.Bus.General
     public class Subasta_Bus
     {
         Subasta_Data odata = new Subasta_Data();
-        public List<Subasta_Info> GetList(string IdUsuario)
+        public List<Subasta_Info> GetList(string IdUsuario, decimal IdProveedor)
         {
             try
             {
-                return odata.GetList(IdUsuario);
+                return odata.GetList(IdUsuario, IdProveedor);
             }
             catch (Exception)
             {
@@ -76,5 +76,18 @@ namespace Core.Bus.General
             }
         }
 
+        public bool EscogerGanador(decimal IdSubasta)
+        {
+            try
+            {
+                return odata.EscogerGanador(IdSubasta);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
     }
 }

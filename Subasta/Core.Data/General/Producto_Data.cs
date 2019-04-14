@@ -69,6 +69,7 @@ namespace Core.Data.General
                             on Entity.IdGrupo equals a.IdGrupo
                             join b in db.Linea
                             on a.IdLinea equals b.IdLinea
+                            where Entity.IdProducto == IdProducto
                             select new Producto_Info
                             {
                                 IdProducto = Entity.IdProducto,

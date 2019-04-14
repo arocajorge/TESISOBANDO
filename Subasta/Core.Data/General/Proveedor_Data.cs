@@ -85,7 +85,36 @@ namespace Core.Data.General
             }
             catch (Exception)
             {
-
+                throw;
+            }
+        }
+        public Proveedor_Info GetInfo(string pv_CedulaRuc)
+        {
+            try
+            {
+                Proveedor_Info info = new Proveedor_Info();
+                using (EntitiesGeneral db = new EntitiesGeneral())
+                {
+                    Proveedor Entity = db.Proveedor.Where(q => q.pv_CedulaRuc == pv_CedulaRuc).FirstOrDefault();
+                    if (Entity == null) return null;
+                    info = new Proveedor_Info
+                    {
+                        IdProveedor = Entity.IdProveedor,
+                        pv_CedulaRuc = Entity.pv_CedulaRuc,
+                        pv_Codigo = Entity.pv_Codigo,
+                        pv_Correo = Entity.pv_Correo,
+                        pv_Descripcion = Entity.pv_Descripcion,
+                        pv_Direccion = Entity.pv_Direccion,
+                        pv_Estado = Entity.pv_Estado,
+                        pv_Plazo = Entity.pv_Plazo,
+                        pv_Telefono = Entity.pv_Telefono,
+                        pv_TipoDoc = Entity.pv_TipoDoc
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

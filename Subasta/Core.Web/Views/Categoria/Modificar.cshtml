@@ -1,7 +1,7 @@
 ﻿@model Core.Info.General.Categoria_Info
 @{
     ViewBag.Title = "Modificar categoria ";
-    if (string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdUsuario))
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario))
     {
         Response.Redirect("~/Account/Login");
     }

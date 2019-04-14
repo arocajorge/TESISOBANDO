@@ -1,16 +1,39 @@
 ﻿@model Core.Info.General.Subasta_Info
 @{
     ViewBag.Title = "Modificar subasta";
-    if (string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdUsuario))
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario))
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@using (Html.BeginForm("Modificar","Subasta",FormMethod.Post,new { @role = "form", @class = "form"}))
+<script type="text/javascript">
+    function EscogerGanador(ID) {
+        var datos = {
+            IdOferta: ID,
+            IdSubasta: $("#IdSubasta").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EscogerGanador", "Subasta")',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#myform").submit();
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Modificar","Subasta",FormMethod.Post,new { @role = "form", @class = "form", @id = "myform" }))
 {
-    @Html.HiddenFor(q=> q.IdSubasta)
+    @Html.HiddenFor(q=> q.IdSubasta, new { @id = "IdSubasta"})
     @Html.HiddenFor(q=> q.IdUsuario)
     <div class="row">
         <div class="col-md-12">

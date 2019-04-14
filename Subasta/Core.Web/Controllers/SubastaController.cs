@@ -1,5 +1,5 @@
 ﻿using Core.Bus.General;
-using Core.Erp.Web.Helps;
+using Core.Web.Helps;
 using Core.Info.General;
 using DevExpress.Web;
 using DevExpress.Web.Mvc;
@@ -23,7 +23,7 @@ namespace Core.Web.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_subasta()
         {
-            var model = bus_subasta.GetList(SessionFixed.IdUsuario);
+            var model = bus_subasta.GetList(SessionFixed.IdUsuario, Convert.ToDecimal(SessionFixed.IdProveedor));
             return PartialView("_GridViewPartial_subasta", model);
         }
 
@@ -68,6 +68,15 @@ namespace Core.Web.Controllers
             return View(model);
         }
 
+        public ActionResult Ofertar(decimal IdSubasta = 0)
+        {
+            Subasta_Info model = bus_subasta.GetInfo(IdSubasta);
+            if (model == null)
+                return RedirectToAction("Index");
+            SessionFixed.IdSubasta = model.IdSubasta.ToString();
+            return View(model);
+        }
+
         public ActionResult Anular(decimal IdSubasta = 0)
         {
             Subasta_Info model = bus_subasta.GetInfo(IdSubasta);
@@ -95,6 +104,11 @@ namespace Core.Web.Controllers
             Subasta_Info model = new Subasta_Info();
             return PartialView("_CmbProducto", model);
         }
+        public ActionResult CmbProductoReadOnly()
+        {
+            Subasta_Info model = new Subasta_Info();
+            return PartialView("_CmbProductoReadOnly", model);
+        }
         public List<Producto_Info> GetListProducto(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
             return bus_producto.GetList(args);
@@ -108,8 +122,13 @@ namespace Core.Web.Controllers
         #region Detalle
         public ActionResult GridViewPartial_subasta_det()
         {
-            var model = bus_oferta.GetList(Convert.ToDecimal(SessionFixed.IdSubasta));
+            var model = bus_oferta.GetList(Convert.ToDecimal(SessionFixed.IdSubasta),Convert.ToDecimal(SessionFixed.IdProveedor));
             return PartialView("_GridViewPartial_subasta_det", model);
+        }
+        public ActionResult GridViewPartial_subasta_det_oferta()
+        {
+            var model = bus_oferta.GetList(Convert.ToDecimal(SessionFixed.IdSubasta), Convert.ToDecimal(SessionFixed.IdProveedor));
+            return PartialView("_GridViewPartial_subasta_det_oferta", model);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -123,8 +142,8 @@ namespace Core.Web.Controllers
                 info_det.of_FechaFin = DateTime.Now.Date.AddDays(info_det.of_Plazo);
                 bus_oferta.GuardarDB(info_det);
             }
-            var model = bus_oferta.GetList(Convert.ToDecimal(SessionFixed.IdSubasta));
-            return PartialView("_GridViewPartial_subasta_det", model);
+            var model = bus_oferta.GetList(Convert.ToDecimal(SessionFixed.IdSubasta), Convert.ToDecimal(SessionFixed.IdProveedor));
+            return PartialView("_GridViewPartial_subasta_det_oferta", model);
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] Oferta_Info info_det)
@@ -137,8 +156,17 @@ namespace Core.Web.Controllers
                 info_det.of_FechaFin = DateTime.Now.Date.AddDays(info_det.of_Plazo);
                 bus_oferta.ModificarDB(info_det);
             }
-            var model = bus_oferta.GetList(Convert.ToDecimal(SessionFixed.IdSubasta));
-            return PartialView("_GridViewPartial_subasta_det", model);
+            var model = bus_oferta.GetList(Convert.ToDecimal(SessionFixed.IdSubasta), Convert.ToDecimal(SessionFixed.IdProveedor));
+            return PartialView("_GridViewPartial_subasta_det_oferta", model);
+        }
+        #endregion
+
+        #region Json
+        public JsonResult EscogerGanador(decimal IdOferta = 0, decimal IdSubasta = 0)
+        {
+            bus_subasta.EscogerGanador(IdSubasta);
+            bus_oferta.EscogerGanador(IdOferta);
+            return Json("", JsonRequestBehavior.AllowGet);
         }
         #endregion
     }
