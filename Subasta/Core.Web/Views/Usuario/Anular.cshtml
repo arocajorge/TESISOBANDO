@@ -1,0 +1,63 @@
+﻿@model Core.Info.General.Usuario_Info
+@{
+    ViewBag.Title = "Anular usuario";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Anular", "Usuario", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q=> q.IdUsuario)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ca_Codigo">Usuario*</label>
+                    @Html.TextBoxFor(q => q.IdUsuario, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.IdUsuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ca_Codigo">Clave*</label>
+                    @Html.TextBoxFor(q => q.us_Clave, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.us_Clave, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ca_Descripcion">Nombre*</label>
+                    @Html.TextBoxFor(q => q.us_Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.us_Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ca_Descripcion">Correo*</label>
+                    @Html.TextBoxFor(q => q.us_Correo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.us_Correo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Usuario",null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

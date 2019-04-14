@@ -203,6 +203,7 @@
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\SubastaController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -7366,6 +7367,7 @@
     <Content Include="bower_DevExpress\knockout\LICENSE" />
     <Content Include="bower_DevExpress\knockout\package.json" />
     <Content Include="bower_DevExpress\knockout\README.md" />
+    <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -7441,6 +7443,11 @@
     <Content Include="Views\Subasta\Ofertar.cshtml" />
     <Content Include="Views\Subasta\_GridViewPartial_subasta_det_oferta.cshtml" />
     <Content Include="Views\Subasta\_CmbProductoReadOnly.cshtml" />
+    <Content Include="Views\Usuario\_GridViewPartial_usuario.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Nuevo.cshtml" />
+    <Content Include="Views\Usuario\Modificar.cshtml" />
+    <Content Include="Views\Usuario\Anular.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
