@@ -26,7 +26,10 @@ namespace Core.Web.Controllers
 
         public ActionResult RPT_002()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdProveedor = 0
+            };
             RPT_002_Rpt report = new RPT_002_Rpt();
             cargar_Combos(model);
             report.p_IdProveedor.Value = model.IdProveedor;

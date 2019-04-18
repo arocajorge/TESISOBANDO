@@ -29,7 +29,7 @@ namespace Core.Data.General
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception EX)
             {
 
                 throw;
